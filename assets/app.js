@@ -90,7 +90,7 @@ const PAGES = {
    listLabel:'What’s included',
    items:[{a:'White-label, always',b:'No Toggle branding. Delivered under your name.'},{a:'One fee per client',b:'New client, new fee. Same margin.'},{a:'A dedicated art director',b:'Learns each client’s brand system.'},{a:'Quality we stand behind',b:'Every file reviewed before it reaches you.'},{a:'NDA from day one',b:'Your clients stay your clients.'}],
    addon:'Start with one client. Get 20% off your first month.', foot:''},
-  {id:'pricing', type:'pricing', calc:false, h:'Pay for ideas. Get unlimited files.', s:'First month 20% off.', plans:PLANS, single:{k:'Agency rate', p:'From $2,990', per:'', l:'for one client and 4 concepts per month.'},
+  {id:'pricing', type:'pricing', calc:false, h:'Pay for ideas. Get unlimited files.', s:'First month 20% off.', plans:PLANS, single:{k:'Agency rate', p:'From $3,289', per:'', l:'for one client and 4 concepts per month.'},
    note:'Pay for concepts, not variations. Add formats, languages and hooks at no extra cost.'},
   {id:'faq', type:'faq', label:'Questions', items:[{q:'Will my client know?',a:'No. We work behind the scenes.'},{q:'Can you match each client’s brand?',a:'That’s the job.'},{q:'How is this different from AI tools?',a:'Senior people make every call and sign off every file. Tools multiply the output.'},{q:'Can we use the files for our client?',a:'Yes. All deliverables are prepared for commercial use in your client projects.'}]},
   {id:'form', type:'form', label:'Next step', h:'Take every brief.', s:'Start with one client. Get 20% off your first month.', cta:'Get an agency quote',
