@@ -3,9 +3,9 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/",
-      "destination": "/main",
-      "permanent": false
+      "source": "/main",
+      "destination": "/",
+      "permanent": true
     },
     {
       "source": "/agencies",

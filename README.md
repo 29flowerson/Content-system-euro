@@ -4,10 +4,10 @@ Static site for **concepts.toggle.studio**, deployed on Vercel from this reposit
 
 | URL | File |
 |---|---|
-| concepts.toggle.studio/main | `main/index.html` |
+| concepts.toggle.studio | `index.html` (main landing) |
 | concepts.toggle.studio/agency | `agency/index.html` |
 | concepts.toggle.studio/brand | `brand/index.html` |
-| concepts.toggle.studio/ | redirects to `/main` (see `vercel.json`) |
+| concepts.toggle.studio/main | redirects to `/` (see `vercel.json`) |
 
 Shared code: `assets/app.css`, `assets/app.js`. Media: `media/`.
 
@@ -26,4 +26,4 @@ Vercel project → Settings → Git → connected to this repo. Framework preset
 Every push to `main` updates the live site; other branches get preview links.
 
 ## Run locally
-`npx serve .` (or any static server) in this folder, then open http://localhost:3000/main
+`npx serve .` (or any static server) in this folder, then open http://localhost:3000
