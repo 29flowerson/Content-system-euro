@@ -35,6 +35,8 @@ body.editing .toggle{background:var(--edit);color:#1A0E00}
 .nav{margin-top:20px;background:var(--grey);border-radius:999px;display:flex;align-items:center;gap:16px;padding:10px 10px 10px 32px}
 .logo{display:inline-flex;align-items:center;color:var(--ink);flex:none}
 .logo svg{display:block;height:19px;width:auto}
+a.logo{text-decoration:none;transition:color .2s}
+a.logo:hover,a.logo:focus-visible{color:var(--kite)}
 .nav .links{display:flex;gap:28px;margin:0 auto;flex-wrap:wrap;justify-content:center}
 .nav .links button{background:none;border:0;cursor:pointer;font-size:17px;font-weight:600;color:var(--ink)}
 .nav .links button:hover{text-decoration:underline;text-underline-offset:4px}
@@ -219,6 +221,12 @@ body.editing .reeltile.has-vid .reelcap{display:flex;background:rgba(12,43,63,.8
 .t-navy .work-link{border-color:#fff}
 .t-navy .work-link:hover{background:var(--sky);color:var(--navy);border-color:var(--sky)}
 .wl-m{display:none}
+/* logos card next to the film: fills the card, edges line up with the label and the button */
+.trust-card{justify-content:flex-start;gap:clamp(20px,2.4vw,36px)}
+.trust-card .logos{flex:1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:clamp(12px,1.6vw,28px);align-content:space-evenly;align-items:center;row-gap:clamp(24px,3vw,44px)}
+.trust-card .logos li{padding:0;min-width:0;width:100%;display:flex;justify-content:center}
+.trust-card .logos li:nth-child(5n+1){justify-content:flex-start}.trust-card .logos li:nth-child(5n){justify-content:flex-end}
+@media (max-width:760px){.trust-card .logos{display:flex;align-content:normal;justify-content:center}.trust-card .logos li,.trust-card .logos li:nth-child(n){padding:0 8px;width:auto;justify-content:center}}
 .plan-single{justify-content:space-between;min-height:240px}
 .plan-single .price{font:500 clamp(44px,5vw,76px)/1 var(--font);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .plan-single .per{font-size:18px;opacity:.75}
