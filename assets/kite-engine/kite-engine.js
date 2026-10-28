@@ -225,7 +225,7 @@
         h += hl(lines, { fs, left: m, top: H - fieldH + 40, maxW: W - m * 2 });
         if (tag) h += txt('<span class="typer" data-text="' + esc(tag) + '"></span>', { html: 1, fs: fs * 0.82, color: CREAM, right: m, bottom: 60, cls: 'b8' });
         else if (small) h += txt(small, { html: 1, fs: fs * 0.62, color: CREAM, left: m, bottom: 60, cls: 'b8', maxW: W - m * 2 });
-      } else if (F.c === '9x16') { /* tall split: photo column on the left, the field column widens across the bottom */
+      } else if (false) { /* (unused) tall split, looked like 'Field below'; 9:16 now uses the side-by-side split below: photo column on the left, the field column widens across the bottom */
         const cx = Math.round(W * 0.64), step = Math.round(H * 0.64);
         h += video(0, 0, cx + 2, step + 2, '42% 50%');
         h += field(cx, 0, W - cx, H, OR_L, 'right', W / (W - cx)) + tab(0, step, cx + 12, H - step, OR_L, 'left-top');
@@ -235,7 +235,7 @@
         else if (sub) h += txt(esc(sub), { html: 1, fs: fs * 0.6, color: CREAM, left: m, top: step + 70 + fs * 2.75, cls: 'b8', maxW: W - m * 2 });
         if (tag) h += txt('<span class="typer" data-text="' + esc(tag) + '"></span>', { html: 1, fs: fs * 0.78, color: CREAM, right: m, bottom: 80, cls: 'b8' });
       } else { /* split: photo left, field column right; a short rounded tab sticks out of the column low on the left (KITE_GOOD 2_3: 34px wide, 72%–96% of the height) */
-        const cx = Math.round(W * (wide ? 0.56 : 0.531)), step = Math.round(H * 0.28);
+        const cx = Math.round(W * (wide ? 0.56 : F.c === '9x16' ? 0.40 : 0.531)), step = Math.round(H * (F.c === '9x16' ? 0.24 : 0.28));
         h += video(0, 0, cx + 2, H, '35% 50%');
         h += field(cx, 0, W - cx, H, OR_L, 'right', W / (W - cx)) + tab(cx - 34, Math.round(H * 0.722), 46, Math.round(H * 0.241), OR_L, 'left');
         h += logo(CREAM, 110, 68, 69, 'filter:drop-shadow(0 2px 10px rgba(0,0,0,.25))');
@@ -244,6 +244,7 @@
         if (list) h += hl(list, { fs: fs * 0.56, left: cx + 20, top: step + 40 + fs * 0.9 * 2.6, maxW: cw, delay: 0.3 });
         else if (sub) h += txt(esc(sub), { html: 1, fs: fs * 0.58, color: CREAM, left: cx + 20, top: step + 40 + fs * 0.9 * 2.6, cls: 'b8', maxW: cw });
         if (tag) h += txt('<span class="typer" data-text="' + esc(tag) + '"></span>', { html: 1, fs: fs * 0.78, color: CREAM, right: wide ? 72 : 48, bottom: 60, cls: 'b8' });
+        else h += hl([LIFE.cta[li]], { fs: fs * (F.c === '9x16' ? 0.68 : 0.56), left: cx + 20, bottom: wide ? 72 : 80, maxW: cw, delay: 0.45, cls: 'caps' }); /* fills the empty column with the call to action */
       }
       return { html: h, bg: OR_L };
     }
@@ -301,7 +302,7 @@
         : ({ '9x16': { base: H * 0.43, ox: W * 0.49, size: 540, fs: 112, tx: 108, cta: 200, maxW: W - 216, tabL: W * 0.597, lift: 0.08, gap: 270 },
           '4x5': { base: H * 0.4237, ox: W * 0.49, size: 460, fs: 101, tx: 108, cta: 132, maxW: W - 216, tabL: W * 0.597, lift: 0.08, gap: 203 },
           '1x1': { base: H * 0.43, ox: W * 0.47, size: 360, fs: 86, tx: 108, cta: 80, maxW: W - 216, tabL: W * 0.597, lift: 0.12, gap: 130 } })[F.c];
-      G.tabR = W - 55; G.tabTop = G.base - 99; G.ty = G.base + G.gap;
+      G.tabR = W - 55; G.tabTop = G.base - (wide ? 99 : 50); /* portrait/square: shorter tab, like the other styles */ G.ty = G.base + G.gap;
       return G;
     },
     render(s, F, li) {
