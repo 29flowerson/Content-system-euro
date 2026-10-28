@@ -36,7 +36,7 @@ body.editing .toggle{background:var(--edit);color:#1A0E00}
 .logo{display:inline-flex;align-items:center;color:var(--ink);flex:none}
 .logo svg{display:block;height:19px;width:auto}
 a.logo{text-decoration:none;transition:color .2s}
-a.logo:hover,a.logo:focus-visible{color:var(--kite)}
+a.logo:hover,a.logo:focus-visible{color:#EA8007}
 .nav .links{display:flex;gap:28px;margin:0 auto;flex-wrap:wrap;justify-content:center}
 .nav .links button{background:none;border:0;cursor:pointer;font-size:17px;font-weight:600;color:var(--ink)}
 .nav .links button:hover{text-decoration:underline;text-underline-offset:4px}

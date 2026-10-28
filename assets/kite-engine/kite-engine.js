@@ -633,7 +633,7 @@ button{font:inherit;color:inherit}
 .pills{display:flex;flex-wrap:wrap;gap:8px}
 .pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:16px;cursor:pointer;color:var(--ink);white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
 .pill[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
-.group.is-style .pill[aria-pressed="true"]{background:var(--kite);border-color:var(--kite)}
+.group.is-style .pill[aria-pressed="true"]{background:#EA8007;border-color:#EA8007}
 .group.is-style{padding-bottom:14px;border-bottom:1px solid rgba(12,43,63,.12)}
 .stage{flex:1;display:grid;place-items:center;min-height:440px;position:relative}
 .readout{border-top:1px solid rgba(12,43,63,.15);padding-top:16px;display:flex;flex-direction:column;gap:6px}
