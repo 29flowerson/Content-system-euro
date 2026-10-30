@@ -302,6 +302,7 @@ body.editing .mswap{display:flex}
 .faq-extras{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;background:#fff;border-radius:18px;margin-top:8px}
 .faq-extras > div{padding:18px 22px;display:flex;flex-direction:column;gap:6px}
 .faq-extras > div + div{border-left:1px solid var(--line)}
+.faq-extras > div:only-child{grid-column:1/-1}
 /* pricing */
 .plan{justify-content:space-between;cursor:pointer;min-height:240px}
 .plan-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
@@ -436,6 +437,7 @@ body.editing .mod.is-hidden{display:flex;opacity:.35}
   .plans3{grid-template-columns:minmax(0,1fr)}
   .approach-roles{display:none}
   .feat-grid > .tile{grid-column:span 6;padding:16px;min-height:150px}
+  .feat-grid > .tile:last-child:nth-child(odd){grid-column:span 12;min-height:0}
   .feat-grid .h-m{font-size:18px}
   .feat-grid .muted{font-size:14px}
   .eng .pill{padding:9px 13px}

@@ -46,7 +46,7 @@ function adHTML(st){
 /* ---------- landing configs ----------
    Module types: hero · visual · statement · engine · uses · list · steps · proof · trust · pricing · agencyplan · faq · form
    span = columns of 12; tone = navy | sky | grey | light | white */
-const PLANS = [{n:'Starter',p:'$2,739',l:'2 concepts a month'},{n:'Growth',p:'$4,389',l:'6 concepts a month'},{n:'Scale',p:'$8,250',l:'12 concepts a month'}];
+const PLANS = [{n:'Starter',p:'$2,740',l:'2 concepts a month'},{n:'Growth',p:'$4,390',l:'4 concepts a month'},{n:'Scale',p:'$5,990',l:'6 concepts a month'}];
 const CALCL = {label:'Your monthly output', l2:'Formats', l3:'Languages', l4:'Hooks', r1:'files a month', r2:'on'};
 const ROLES = ['Creative direction','Art direction','Design','Motion','Copy & hooks','Localization','Quality control'];
 const PAGES = {
@@ -68,7 +68,7 @@ const PAGES = {
   {id:'pricing', type:'pricing', calc:true, h:'Pay for ideas. Get unlimited files.', s:'First month 20% off on any plan.', plans:PLANS, popular:1,
    note:'Each concept can be adapted across formats, sizes, languages and hooks at no extra cost.'},
   {id:'faq', type:'faq', label:'Questions', items:[{q:'How is this different from AI tools?',a:'AI tools can generate variations. Our team develops the concepts, directs the creative and reviews every asset.'},{q:'What does a concept include?',a:'The idea, the art direction and every version of it.'},{q:'How many files do I get?',a:'As many as you need. You pay per concept.'},{q:'How soon do we get the first files?',a:'First files in 5 days.'}],
-   extras:[{l:'Branding',t:'We build or refine your identity on request.'},{l:'Agencies',t:'25% off with 3+ client accounts.'}]},
+   extras:[{l:'Branding',t:'We build or refine your identity on request.'}]},
   {id:'form', type:'form', label:'Next step', h:'Start with one month.', s:'Tell us your goals. We’ll show you how we’d approach them.', cta:'Get 20% off your first month',
    ft:'Request your test month', f1:'Name', f2:'E-mail', f3:'Company & website', ph3:'Company name and website URL', f4:'I am', chips:['An agency','A brand','Not sure yet'], plan:true, f5:'Your goals (optional)', btn:'Send request', done:'Thanks! We’ve got your request and will be in touch soon.'}
  ]},
@@ -79,14 +79,14 @@ const PAGES = {
   {id:'s2', type:'statement', span:3, tone:'sky', h:'Built for your clients’ brands', s:'We stay invisible. Your client sees only you.'},
   {id:'engine', type:'engine', label:'Demo', h:'Concepts for your clients.', h2:'Across formats, languages and markets.',
    order:['format','lang','layout','scene','hook'], init:{layout:2, hook:0, lang:3, scene:1, format:2}, kinit:{style:'object', format:2}, combo:'versions per client concept. Each one approved by a person.'},
-  {id:'solve', type:'features', items:[{t:'Handle the overflow',s:'Take on extra briefs without stretching your team.',tone:'navy'},{t:'Your quality bar, kept',s:'Senior art direction and quality checks on every file.',tone:'sky'},{t:'Fits your workflow',s:'Your briefs, your tools, your timeline.',tone:'grey'},{t:'A margin you can plan',s:'25% off with 3+ client accounts',tone:'grey'}]},
+  {id:'solve', type:'features', items:[{t:'Handle the overflow',s:'Take on extra briefs without stretching your team.',tone:'navy'},{t:'Your quality bar, kept',s:'Senior art direction and quality checks on every file.',tone:'sky'},{t:'Fits your workflow',s:'Your briefs, your tools, your timeline.',tone:'grey'}]},
   {id:'approach', type:'approach', label:'Your extended creative and production department', h:'Senior taste, under your name.', s:'Start in a week. No hiring, no onboarding.', roles:ROLES,
    label2:'How white-label works', steps:[
     {t:'You bring the brief',s:'Or just the goal. We propose the direction.'},
     {t:'We craft the concepts',s:'Working within existing brand systems or building new ones.'},
     {t:'We scale every version',s:'Across formats, languages and hooks.'},
     {t:'You deliver',s:'Under your name. We stay invisible.'}]},
-  {id:'plan', type:'agencyplan', label:'Agency partner plan', h:'One partner rate. A margin you can count on.', s:'25% off our standard rates with 3+ client accounts', cta:'Get an agency quote',
+  {id:'plan', type:'agencyplan', label:'Agency partner plan', h:'One partner rate. A margin you can count on.', s:'', cta:'Get an agency quote',
    listLabel:'What’s included',
    items:[{a:'White-label, always',b:'No Toggle branding. Delivered under your name.'},{a:'One fee per client',b:'New client, new fee. Same margin.'},{a:'A dedicated art director',b:'Learns each client’s brand system.'},{a:'Quality we stand behind',b:'Every file reviewed before it reaches you.'},{a:'NDA from day one',b:'Your clients stay your clients.'}],
    addon:'Start with one client. Get 20% off your first month.', foot:''},
@@ -123,7 +123,7 @@ const FOOT = 'Toggle Concepts — art-directed ad creative production by Toggle 
 const TONES = ['navy','sky','grey','light','white'];
 const WIDTHS = [3,4,5,6,7,8,12];
 const SINGLE = ['hero','visual','statement','list','faq'];
-const CONCEPTS = [2,6,12];
+const CONCEPTS = [2,4,6];
 const OPT = {f:[1,2,3,4,5,6], l:[1,2,3,5,10], h:[1,2,3,4]};
 
 /* ---------- media: defaults live here; editors replace them in edit mode (stored in db texts as media.*) ---------- */
@@ -224,7 +224,7 @@ const R = {
    return {cls:`sp-${o.span}`, html:`<div class="tile t-light mini eng"><div class="mini-ctrl">${groups}</div><div class="stage" id="stage" aria-live="polite">${adHTML(st)}</div><div class="readout mini-read"><span class="code" id="code">${codeLine(m,st)}</span><span class="combo"><b>${combos}</b> ${E('span',K('combo'),m.combo)}</span></div></div>`};
  },
  make:(m,K,o)=>({cls:`sp-${o.span}`, html:`<div class="tile t-light make" style="justify-content:space-between;gap:18px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:14px">${E('p',K('h'),m.h,'make-h')}<div class="chips">${m.items.map((t,i)=>E('span',K('i'+i),t,'chip'+(i===0?' lead-chip':''))).join('')}</div>${E('p',K('s'),m.s,'muted')}</div></div>`}),
- features:(m,K)=>({cls:'sp-12', html:`<div class="sub feat-grid">${m.items.map((it,i)=>`<div class="tile t-${it.tone} sp-3 feat">${E('p',K('t'+i),it.t,'h-m')}${E('p',K('s'+i),it.s,'muted push')}</div>`).join('')}</div>`}),
+ features:(m,K)=>({cls:'sp-12', html:`<div class="sub feat-grid">${m.items.map((it,i)=>`<div class="tile t-${it.tone} sp-${12/m.items.length|0} feat">${E('p',K('t'+i),it.t,'h-m')}${E('p',K('s'+i),it.s,'muted push')}</div>`).join('')}</div>`}),
  approach:(m,K)=>({cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-5" style="justify-content:space-between;gap:24px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:12px">${E('p',K('h'),m.h,'h-l')}${E('p',K('s'),m.s,'muted lead')}</div><div class="chips approach-roles">${m.roles.map((t,i)=>E('span',K('r'+i),t,'chip chip-dark')).join('')}</div>${m.proof?`<div class="proof">${E('span',K('pn'),m.proof.n,'proof-n')}${E('p',K('pt'),m.proof.t,'proof-t')}</div>`:''}</div><div class="tile t-grey sp-7" style="gap:8px">${E('span',K('label2'),m.label2,'label')}<div class="srows">${m.steps.map((it,i)=>`<div class="srow"><span class="sn">0${i+1}</span><div>${E('p',K('t'+i),it.t,'st')}${E('p',K('s'+i),it.s,'muted')}</div></div>`).join('')}</div></div></div>`}),
  outputs:(m,K)=>({cls:'sp-12', html:`<div class="tile t-white strip" style="align-items:center">${E('span',K('label'),m.label,'label')}<div class="chips">${m.items.map((t,i)=>E('span',K('i'+i),t,'chip'+(i===0?' lead-chip':''))).join('')}</div></div>`}),
  statement:(m,K,o)=>{ const v = m.viz && o.fx; return {cls:`sp-${o.span}`, html:`<div class="tile t-${o.tone} stmt${v?' has-viz':''}">${E('p',K('h'),m.h,'stmt-h')}${v?vizFormats():''}${E('p',K('s'),m.s,'stmt-s')}</div>`}; },
@@ -254,7 +254,7 @@ const R = {
    }
    return {cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-3" style="justify-content:space-between;min-height:240px">${E('p',K('h'),m.h,'h-m')}${E('p',K('s'),m.s,'muted')}</div>${m.single?`<div class="tile t-sky sp-9 plan-single">${E('span',K('sk'),m.single.k,'label')}<div>${E('span',K('sp'),m.single.p,'price')}${m.single.per?`<span class="per"> ${esc(m.single.per)}</span>`:''}</div>${E('p',K('sl'),m.single.l,'lead')}</div>`:`<div class="sp-9 plans3">${plans}</div>`}${m.note?`<div class="tile t-sky sp-12 price-note">${E('p',K('note'),m.note,'h-m')}</div>`:''}${calc}${m.addon?`<div class="tile ${m.addonAccent?'t-navy addon-accent':'t-white'} sp-12 strip"><span class="plus">+</span>${E('span',K('addon'),m.addon)}${m.foot?E('span',K('foot'),m.foot,'muted'):''}</div>`:''}</div>`};
  },
- agencyplan:(m,K)=>({cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-5" style="justify-content:space-between;gap:28px;min-height:420px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:16px">${E('p',K('h'),m.h,'h-xl')}${E('p',K('s'),m.s,'muted lead')}</div><div>${E('button',K('cta'),m.cta,'pill-cta','type="button" data-go="form" style="background:#fff;color:var(--navy);text-transform:none;font-size:17px;font-weight:600"')}</div></div><div class="tile t-grey sp-7" style="gap:12px">${E('span',K('listLabel'),m.listLabel,'label')}<div class="rows">${m.items.map((it,i)=>`<div class="row">${E('p',K('a'+i),it.a,'a')}${E('p',K('b'+i),it.b,'b')}</div>`).join('')}</div></div><div class="tile t-white sp-12 strip"><span class="plus">+</span>${E('span',K('addon'),m.addon)}${m.foot?E('span',K('foot'),m.foot,'muted'):''}</div></div>`}),
+ agencyplan:(m,K)=>({cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-5" style="justify-content:space-between;gap:28px;min-height:420px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:16px">${E('p',K('h'),m.h,'h-xl')}${m.s?E('p',K('s'),m.s,'muted lead'):''}</div><div>${E('button',K('cta'),m.cta,'pill-cta','type="button" data-go="form" style="background:#fff;color:var(--navy);text-transform:none;font-size:17px;font-weight:600"')}</div></div><div class="tile t-grey sp-7" style="gap:12px">${E('span',K('listLabel'),m.listLabel,'label')}<div class="rows">${m.items.map((it,i)=>`<div class="row">${E('p',K('a'+i),it.a,'a')}${E('p',K('b'+i),it.b,'b')}</div>`).join('')}</div></div><div class="tile t-white sp-12 strip"><span class="plus">+</span>${E('span',K('addon'),m.addon)}${m.foot?E('span',K('foot'),m.foot,'muted'):''}</div></div>`}),
  faq:(m,K,o)=>({cls:`sp-${o.span||12}`, html:`<div class="tile t-${o.tone||'grey'}" style="gap:16px">${E('span',K('label'),m.label,'label')}<div class="faq">${m.items.map((it,i)=>`<div class="qa">${E('p',K('q'+i),it.q,'q','tabindex="0"')}${E('p',K('a'+i),it.a,'a')}</div>`).join('')}</div>${m.extras?`<div class="faq-extras">${m.extras.map((x,i)=>`<div>${E('span',K('xl'+i),x.l,'label')}${E('p',K('xt'+i),x.t)}</div>`).join('')}</div>`:''}</div>`}),
  form:(m,K,o)=>{
    if(!FORM[page]) FORM[page] = {chip:null};
