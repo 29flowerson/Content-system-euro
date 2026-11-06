@@ -3,7 +3,7 @@
 :root{
   color-scheme: light;
   --white:#FFFFFF; --ink:#0C2B3F; --muted:#5A6B78; --navy:#0C2B3F; --sky:#B4E4FA; --grey:#F1F1F1; --line:#DDE3E8;
-  --edit:#FF7A1A; --kite:#FF4F17; --cream:#F7EAD7;
+  --edit:#FF7A1A; --kite:#FF4F17; --orange:#FF4F17; --cream:#F7EAD7;
   --grad-hero:linear-gradient(180deg,#B9E7FA 0%,#86AFC4 38%,#3A5B71 72%,#0C2B3F 100%);
   --grad-light:linear-gradient(180deg,#F3FBFF 0%,#B4E4FA 100%);
   --font:'Inter Tight','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -506,3 +506,515 @@ body.editing .mod.is-hidden{display:flex;opacity:.35}
   .toast{bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
+
+/* =====================================================================
+   v2 — November 2026 rework (focus group)
+   ===================================================================== */
+
+/* --- clickable vs not: buttons are full pills with a border and a hover;
+       tags, categories and badges are flat, square-ish labels with no border --- */
+.chip,.chip.lead-chip{background:rgba(12,43,63,.07);color:var(--ink);border:0;border-radius:8px;padding:8px 13px;font-size:16px;font-weight:500;cursor:default;user-select:none}
+.chip-dark,.chip-dark.lead-chip{background:rgba(255,255,255,.1);color:#fff;border:0}
+.t-light .chip{background:rgba(255,255,255,.7)}
+.pop-badge,.sel-badge{border-radius:6px}
+.pill,.pill-cta,.cta-card,.submit,.work-link,.plan,.nav .links button{transition:background .2s,color .2s,border-color .2s,box-shadow .2s,transform .2s}
+.pill:hover{border-color:var(--navy)}
+.pill[aria-pressed="true"]:hover{background:#1D4A66;border-color:#1D4A66}
+.pill-cta:hover{background:#1D4A66}
+.cta-card:hover{box-shadow:0 8px 24px rgba(12,43,63,.25);transform:translateY(-1px)}
+.cta-card:hover .arr{background:var(--navy);color:#fff}
+.submit:hover{background:#1D4A66}
+.plan:hover{box-shadow:inset 0 0 0 2px var(--navy)}
+@media (hover:none){.cta-card:hover{transform:none;box-shadow:none}}
+
+/* logo copies exist only for the moving row on phones */
+.logos .dup{display:none!important}
+
+/* --- hero: one slogan, a second big line, one action --- */
+.hero-sub{font:500 clamp(26px,2.6vw,40px)/1.05 var(--font);letter-spacing:-.03em;margin:0}
+
+/* --- first screen right side: the path, five steps over three tiles --- */
+.pn{font:600 14px/1 var(--font);letter-spacing:.04em;font-variant-numeric:tabular-nums;opacity:.6}
+.path{justify-content:space-between;gap:28px}
+.path-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
+.path-steps li{display:flex;flex-direction:column;gap:14px;padding-top:18px;border-top:1px solid rgba(12,43,63,.18);position:relative}
+.path-steps li:not(:last-child)::after{content:"→";position:absolute;right:0;top:12px;font-size:18px;opacity:.45}
+.path-steps .pt{font:600 clamp(24px,2.1vw,32px)/1.05 var(--font);letter-spacing:-.03em;margin:0;text-wrap:balance}
+.stmt.has-n{justify-content:flex-start;gap:0}
+.stmt.has-n .pn{margin-bottom:auto}
+/* numbered tiles: number on top, picture in a fixed-height slot, heading on the bottom line — the same line in every tile */
+.stmt-viz{height:62px;display:flex;align-items:flex-end;margin-bottom:22px}
+.stmt-viz .vf{max-width:210px}
+
+/* --- about us: years next to the logos --- */
+.yrs{display:flex;align-items:center;gap:16px}
+.yrs-n{font:600 clamp(52px,5vw,76px)/.85 var(--font);letter-spacing:-.05em;color:var(--navy)}
+.yrs > div{display:flex;flex-direction:column;gap:6px}
+.yrs-t{font:500 clamp(17px,1.4vw,21px)/1.2 var(--font);letter-spacing:-.015em;margin:0;max-width:22ch}
+
+/* --- what we make + how we work by days --- */
+.uses .chips{gap:8px}
+.uses .h-l{margin-top:clamp(8px,2vw,40px)}
+.uses-s{margin-top:auto!important}
+.days{gap:10px}
+.days .h-m{margin-bottom:8px}
+.drows{display:flex;flex-direction:column}
+.drow{display:grid;grid-template-columns:96px minmax(0,1fr) 150px;gap:18px;align-items:start;padding-block:14px;border-top:1px solid var(--line)}
+.drow.dhead{border-top:0;padding-block:0 6px}
+.drow .dd{font:600 15px/1.5 var(--font);color:var(--navy);font-variant-numeric:tabular-nums}
+.drow .st{font:500 21px/1.25 var(--font);letter-spacing:-.015em;margin:0}
+.drow .muted{margin:2px 0 0}
+.dbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding-top:6px}
+.dbar i{height:10px;border-radius:3px;background:rgba(12,43,63,.08)}
+.dbar i.on{background:var(--navy)}
+.drow:last-child .dbar i.on{background:#FF4F17}
+.dhead .dbar{padding-top:0}
+.dhead .dbar i{height:auto;background:none;font:500 12px/1 var(--font);font-style:normal;color:var(--muted);text-align:center}
+
+/* --- pricing --- */
+.price-h{font-size:clamp(26px,2.4vw,38px);line-height:1.05}
+.calc-res .big{font-size:clamp(52px,5vw,84px)}
+.per-big{color:var(--navy)}
+.muted-ink{color:#2E4656;margin:0}
+
+/* --- last block: the offer is the form title; three fields and a comment --- */
+.form-title{font-size:clamp(34px,3.6vw,56px)}
+.form-title{color:#FF4F17;font-weight:650;letter-spacing:-.045em}
+.form-title .off{font-style:normal;font-weight:800}
+.form-short form{gap:22px!important;flex:1}
+.form-short .ff{gap:20px}
+.form-short .field input,.form-short .field textarea{font-size:19px;padding:20px 22px;border-radius:18px}
+.form-short .field textarea{min-height:150px}
+.form-short .submit{padding:26px 30px;font-size:22px;margin-top:auto}
+
+/* --- tablet --- */
+@media (max-width:1100px) and (min-width:761px){
+  .drow{grid-template-columns:80px minmax(0,1fr) 110px;gap:14px}
+  .calc-tile.sp-6{grid-column:span 12}
+  .calc-res.sp-3{grid-column:span 6}
+}
+
+/* --- phone: shorter, one idea per screen --- */
+@media (max-width:760px){
+  .hero-sub{font-size:26px}
+  .path{gap:16px}
+  .path-steps{grid-template-columns:minmax(0,1fr);gap:0}
+  .path-steps li{flex-direction:row;align-items:baseline;gap:14px;padding:12px 0;border-top:1px solid rgba(12,43,63,.14)}
+  .path-steps li::after{display:none}
+  .path-steps .pt{font-size:20px}
+  .stmt.has-n{min-height:120px}
+  .stmt.has-n .stmt-h{font-size:20px}
+  .stmt.has-n .vf{display:none}
+  .stmt-viz{display:none}
+  .trust-top{flex-direction:column;align-items:flex-start;gap:14px}
+  .yrs-n{font-size:56px}
+  .yrs-t{font-size:17px}
+  /* logos: one quiet moving row instead of five rows */
+  .trust-card .logos{display:flex!important;flex-wrap:nowrap;width:max-content;gap:36px;animation:logos 28s linear infinite;justify-content:flex-start}
+  .trust-card .logos li,.trust-card .logos li:nth-child(n){flex:none;padding:0;width:auto}
+  .trust-card{overflow:hidden}
+  .trust-card .logos .dup{display:flex!important}
+  @keyframes logos{to{transform:translateX(-50%)}}
+  .uses .h-l{font-size:26px}
+  .drow{grid-template-columns:minmax(0,1fr) 84px;gap:4px 14px;padding-block:12px}
+  .drow .dd{grid-column:1/-1;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+  .drow.dhead{display:none}
+  .drow .st{font-size:18px}
+  .drow .muted{display:none}
+  .uses-s{display:none}
+  .calc-res .muted{display:none}
+  .calc-tile .group:last-child{display:flex}
+  .price-note .h-m{font-size:19px}
+  .drow .dbar{padding-top:8px}
+  .dbar i{height:8px}
+  .price-head{min-height:0!important}
+  .price-h{font-size:24px}
+  .calc-res.sp-3{grid-column:span 6;padding:18px}
+  .calc-res .big{font-size:40px}
+  .calc-res .lead{font-size:16px}
+  .calc-res p{font-size:13px}
+  .form-title{font-size:32px}
+  .form-short .field input,.form-short .field textarea{font-size:17px;padding:16px 18px}
+  .form-short .field textarea{min-height:110px}
+  .form-short .submit{padding:20px 24px;font-size:19px}
+}
+@media (prefers-reduced-motion:reduce){.trust-card .logos{animation:none!important;flex-wrap:wrap!important;width:auto}}
+
+/* calculator: four switches in a 2 × 2 grid */
+.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 28px}
+.calc-grid .pills{gap:8px}
+.calc-tile .calc-grid .group:last-child{display:flex}
+
+/* branding add-on: one navy band, heading left, text and button right */
+.addon2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;gap:18px clamp(32px,5vw,96px)}
+.ad2-txt{display:contents}
+.ad2-txt > .ad2-l{grid-column:1;grid-row:1}
+.ad2-txt > .h-l{grid-column:1;grid-row:2 / 4;max-width:14ch;align-self:end}
+.ad2-txt > .lead{grid-column:2;grid-row:2;max-width:44ch;align-self:end}
+.ad2-act{grid-column:2;grid-row:3;display:flex;align-items:center;gap:12px}
+.ad2-l{align-self:flex-start;justify-self:start;font:600 12px/1 var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--navy);background:var(--sky);border-radius:6px;padding:7px 10px}
+.ad2-btn{background:#fff;color:var(--navy);text-transform:none;font-size:17px;font-weight:600}
+.ad2-btn:hover{background:var(--sky)}
+@media (max-width:760px){
+  .calc-grid{grid-template-columns:minmax(0,1fr);gap:14px}
+  .addon2{grid-template-columns:minmax(0,1fr);gap:14px}
+  .ad2-txt > .ad2-l,.ad2-txt > .h-l,.ad2-txt > .lead,.ad2-act{grid-column:1;grid-row:auto}
+  .addon2 .h-l{font-size:26px;max-width:none}
+  .addon2 .lead{font-size:16px}
+}
+
+/* 04: four files getting their tick — same card language as the formats in 05, on navy */
+.vchk{display:flex;gap:10px;align-items:flex-end}
+.vchk i{position:relative;width:52px;height:60px;border-radius:8px;background:linear-gradient(160deg,#E4F5FD 0%,#B4E4FA 100%);padding:7px}
+.vchk i::before{content:"";position:absolute;left:7px;right:7px;top:7px;height:26px;border-radius:5px;background:linear-gradient(135deg,#7FB6D3,#3A6F8F)}
+.vchk i::after{content:"";position:absolute;left:7px;width:60%;bottom:9px;height:5px;border-radius:3px;background:#0C2B3F;box-shadow:0 -9px 0 -1px rgba(12,43,63,.35)}
+.vchk b{position:absolute;right:-7px;top:-7px;width:22px;height:22px;border-radius:99px;background:#FF4F17;box-shadow:0 0 0 3px var(--navy);display:grid;place-items:center;z-index:1;animation:tick 6s cubic-bezier(.2,.8,.3,1.3) infinite;animation-delay:calc(var(--i) * .35s)}
+.vchk b::after{content:"";width:9px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-1px) rotate(-45deg)}
+@keyframes tick{0%{transform:scale(0)}6%{transform:scale(1.15)}9%,90%{transform:scale(1)}100%{transform:scale(0)}}
+@media (prefers-reduced-motion:reduce){.vchk b{animation:none}}
+@media (max-width:760px){.vchk{display:none}}
+
+/* phone calculator: one line per switch (label left, buttons right), smaller buttons */
+@media (max-width:760px){
+  .calc-tile{gap:14px!important}
+  .calc-grid{gap:10px}
+  .calc-grid .group{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .calc-grid .group .label{flex:1;min-width:0;font-size:11px;line-height:1.25}
+  .calc-grid .pills{flex-wrap:nowrap;gap:5px}
+  .calc-grid .pill{width:40px;height:40px;padding:0;display:grid;place-items:center;font-size:14px}
+  .calc-res.sp-3{min-height:0}
+  .calc-res .lead{margin:0}
+}
+
+@media (max-width:760px){
+  .plan{min-height:0!important;padding:16px 20px!important}
+  .plans3{gap:8px}
+}
+
+/* way back to the main page on the two sub-landings */
+.nav .home{order:-1;flex:none;display:grid;place-items:center;width:44px;height:44px;margin-left:-22px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:0;font:500 20px/1 var(--font);color:var(--ink);cursor:pointer}
+.nav .home:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+@media (max-width:760px){.nav .home{margin-left:-12px;width:40px;height:40px}}
+
+/* landing links in the footer */
+.foot-links{display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot-links button{background:none;border:0;padding:0;font:inherit;color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(12,43,63,.3)}
+.foot-links button:hover{text-decoration-color:var(--ink)}
+/* tablet + phone menu: the links hide below 1100px, a round button opens them under the bar */
+.burger{display:none}
+@media (max-width:1100px){
+  .nav{position:relative;gap:8px}
+  .burger{display:grid;place-content:center;gap:5px;flex:none;width:44px;height:44px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;padding:0}
+  .burger i{display:block;width:16px;height:2px;border-radius:2px;background:var(--ink);transition:transform .25s}
+  .nav.open .burger i:first-child{transform:translateY(3.5px) rotate(45deg)}
+  .nav.open .burger i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+  .nav.open .links{display:flex;position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:40;flex-direction:column;align-items:stretch;gap:4px;margin:0;padding:10px;background:#fff;border-radius:22px;box-shadow:0 18px 50px rgba(12,43,63,.18)}
+  .nav.open .links button{text-align:left;padding:14px 16px;border-radius:14px;font-size:17px}
+  .nav.open .links button:hover{background:var(--grey);text-decoration:none}
+  .nav.open .links button[data-go^="/"]{border:0;background:var(--grey);justify-content:space-between}
+  .nav.open .links button[data-go^="/"]::after{content:"→";opacity:.6}
+  .nav .links ~ .pill-cta{margin-left:auto}
+}
+@media (max-width:760px){
+  /* the sticky bar at the bottom already carries the CTA on phones */
+  .nav .pill-cta{display:none}
+  .burger{margin-left:auto}
+  .foot{flex-direction:column;gap:14px}
+  .foot-links{gap:10px 18px;font-size:16px}
+}
+
+/* 04 tile at tablet widths: smaller cards so all four fit */
+@media (max-width:1240px) and (min-width:761px){.vchk{gap:7px}.vchk i{width:40px;height:50px}.vchk i::before{height:20px}}
+
+@media (max-width:760px){.hero.flat{min-height:0}}
+
+/* ======================= v3 (6 Nov): path track, concept, tags vs buttons, true navy ======================= */
+/* navy tiles: the soft-light grain lifted navy towards teal; a deeper base lands the result on brand navy */
+.t-navy{background-color:#071F30}
+.price-head,.calc-res.t-navy{background-color:#071F30}
+
+/* tags: information, never clickable — a hairline list with a small square marker (buttons are pills) */
+.tags{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(16px,2vw,28px)}
+.tag{display:flex;align-items:center;gap:11px;padding:11px 0;border-top:1px solid rgba(12,43,63,.14);font:500 16px/1.25 var(--font);letter-spacing:-.005em;cursor:default;user-select:none;min-width:0}
+.tag::before{content:"";flex:none;width:6px;height:6px;border-radius:1.5px;background:var(--navy)}
+.t-navy .tag,.t-grad .tag{border-color:rgba(255,255,255,.16);color:#fff}
+.t-navy .tag::before,.t-grad .tag::before{background:var(--sky)}
+.t-sky .tag,.t-light .tag{border-color:rgba(12,43,63,.16)}
+
+/* path: title, label and a five-step track (number, segment, step) that fits the tile */
+.path{justify-content:space-between;gap:26px}
+.path-head{display:flex;flex-direction:column;gap:14px}
+.path-h{font:500 clamp(26px,2.5vw,38px)/1.04 var(--font);letter-spacing:-.035em;max-width:20ch}
+.track{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));column-gap:10px}
+.track li{display:flex;flex-direction:column;gap:12px;min-width:0}
+.track .node{font:600 13px/1 var(--font);letter-spacing:.04em;color:rgba(12,43,63,.6);font-variant-numeric:tabular-nums}
+.track .node::before{content:"0"}
+.track li::after{content:"";order:-1;display:none}
+.track .pt{font:600 clamp(16px,1.32vw,20px)/1.14 var(--font);letter-spacing:-.022em;margin:0;text-wrap:balance;padding-top:14px;border-top:4px solid var(--navy);border-radius:0}
+.track li:last-child .pt{border-top-color:var(--orange)}
+
+/* statements: title, picture, line */
+.stmt{justify-content:space-between}
+.stmt-viz2{display:flex;align-items:center;min-height:64px}
+.stmt-viz2 .vf{max-width:230px}
+.stmt-viz2 .vchk{max-width:230px}
+
+/* concept: the definition is the headline of the tile */
+.concept{justify-content:flex-start;gap:clamp(22px,2.4vw,34px)}
+.concept .uses-for{margin-top:auto}
+.cdef{margin:0;display:flex;flex-direction:column;gap:8px}
+.cdef-k{font:600 clamp(46px,4.8vw,76px)/.92 var(--font);letter-spacing:-.045em;color:#fff}
+.cdef-v{font:500 clamp(24px,2.3vw,36px)/1.08 var(--font);letter-spacing:-.03em;color:var(--sky);text-wrap:balance;max-width:16ch}
+.uses-for{display:flex;flex-direction:column;gap:14px}
+.concept .uses-s{margin:0!important}
+.cdef-row{border-top:1px solid rgba(255,255,255,.18);padding-top:22px;gap:6px}
+.cdef-row .cdef-k{font-size:clamp(34px,3vw,46px)}
+.cdef-row .cdef-v{font-size:clamp(18px,1.5vw,22px);line-height:1.25;letter-spacing:-.015em;max-width:30ch}
+.approach-roles{margin-top:4px}
+
+/* trust: years without the plus */
+.yrs-n{min-width:1.1em}
+
+/* pricing: calm note, results without fine print, branding add-on on the hero gradient */
+.price-note::before{display:none}
+.price-note{justify-content:center}
+.price-note .h-m{text-align:center}
+.addon2{background-image:var(--noise),linear-gradient(180deg,#B9E7FA 0%,#6F9BB4 24%,#2B4E66 46%,#0C2B3F 68%,#0C2B3F 100%);background-size:180px 180px,100% 100%;min-height:260px;align-items:end;animation:none}
+.addon2 .ad2-l{background:var(--navy);color:#fff}
+.addon2 .h-l{color:#fff;max-width:13ch}
+.addon2 .lead{color:#E3EEF4}
+.addon2 .ad2-btn{background:#fff;color:var(--navy)}
+.addon2 .ad2-btn:hover{background:var(--sky)}
+
+/* faq: question and answer on one baseline grid, no stray gaps */
+.qa{gap:8px;padding-block:20px}
+.qa .a{margin:0;max-width:52ch;line-height:1.5}
+
+@media (max-width:760px){
+  .tags{column-gap:14px}
+  .tag{font-size:14px;padding:9px 0;gap:9px}
+  .path-h{font-size:24px}
+  .track{grid-template-columns:minmax(0,1fr);row-gap:0}
+  .track li{flex-direction:row;align-items:baseline;gap:14px;padding:11px 0;border-top:1px solid rgba(12,43,63,.14)}
+  .track li:first-child{border-top:0}
+  .track .pt{border-top:0;padding-top:0;font-size:18px}
+  .track li:last-child .node{color:var(--orange)}
+  .cdef-k{font-size:44px}
+  .cdef-v{font-size:24px}
+  .cdef-row .cdef-k{font-size:32px}
+  .cdef-row .cdef-v{font-size:16px}
+  .stmt-viz2{display:none}
+  .addon2{min-height:0}
+  .qa{padding-block:14px}
+}
+/* tablet: the five steps become a list, side-by-side pairs stack, form fields get full width */
+@media (min-width:761px) and (max-width:1100px){
+  #mod-hero{grid-column:span 12!important;grid-row:auto!important}
+  #mod-hero .hero{min-height:360px}
+  #mod-path,#mod-reel,#mod-make{grid-column:span 12!important}
+  #mod-s1,#mod-s2{grid-column:span 6!important}
+  .concept,.days{grid-column:span 12!important}
+  #mod-approach .sub > .tile{grid-column:span 12!important}
+  .concept .uses-for{margin-top:8px}
+  .form-short .ff{grid-template-columns:minmax(0,1fr)}
+  #mod-pricing .price-head,#mod-pricing .plans3,#mod-pricing .plan-single{grid-column:span 12!important}
+  #mod-pricing .price-head{min-height:0!important}
+}
+/* calculator results: one logic for both tiles — big number, then its caption (formula stays on every screen) */
+.calc-res{justify-content:flex-start!important;gap:10px}
+.calc-res .big{margin:0}
+.calc-res .lead{margin:0;font-weight:500}
+.calc-res .muted{margin:6px 0 0}
+@media (max-width:760px){
+  .calc-res .muted{display:block;font-size:12.5px;line-height:1.35}
+}
+
+/* ======================= v3.1: lighter hand — weights, illustrations, spacing ======================= */
+/* weights: headings 500, only the hero slogan stays 600 */
+.stmt-h{font-weight:500;letter-spacing:-.03em}
+.track .pt{font-weight:500;letter-spacing:-.02em;border-top-width:3px}
+.track .node{font-weight:500}
+.cdef-k{font-weight:500;letter-spacing:-.05em}
+.cdef-v{font-weight:400}
+.tag{font-weight:450}
+.path-h{letter-spacing:-.04em}
+
+/* people check: four outlined files, a small orange tick lands on each (no bounce) */
+.vchk{gap:12px}
+.vchk i{width:46px;height:56px;border-radius:7px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(180,228,250,.32);padding:0}
+.vchk i::before{left:6px;right:6px;top:6px;height:24px;border-radius:4px;background:linear-gradient(135deg,rgba(180,228,250,.6),rgba(180,228,250,.16))}
+.vchk i::after{left:6px;width:58%;bottom:9px;height:2px;border-radius:2px;background:rgba(255,255,255,.6);box-shadow:0 -7px 0 0 rgba(255,255,255,.22)}
+.vchk b{right:-5px;top:-5px;width:16px;height:16px;box-shadow:none;animation:tick2 6s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:calc(var(--i) * .35s)}
+.vchk b::after{width:6px;height:3px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff}
+@keyframes tick2{0%{opacity:0;transform:scale(.6)}6%,90%{opacity:1;transform:none}100%{opacity:0;transform:scale(.9)}}
+@media (max-width:1240px) and (min-width:761px){.vchk{gap:8px}.vchk i{width:38px;height:48px}.vchk i::before{height:19px}}
+
+/* every format: light cards, hairline text, a thin orange call to action */
+.vf-card{background:#fff;padding:10%;gap:8%;box-shadow:0 1px 0 rgba(12,43,63,.08)}
+.vf-card .im{background:linear-gradient(135deg,#CFEFFC,#7FB6D3);border-radius:3px}
+.vf-card .ln{height:5%;min-height:2px;background:rgba(12,43,63,.55)}
+.vf-card .bt{height:6%;min-height:2px;background:#FF4F17;width:38%}
+.vf-c.wide .vf-card .ln{height:8%}.vf-c.wide .vf-card .bt{height:9%}
+.vf-lang{display:none}
+.t-navy .vf-card{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(180,228,250,.32)}
+.t-navy .vf-card .ln{background:rgba(255,255,255,.6)}
+/* nav landing buttons: clean white pills, no outline ring (focus ring only for keyboard) */
+.nav .links button[data-go^="#"],.nav .links button[data-go^="/"]{border-color:transparent;box-shadow:none}
+.nav .links button:focus:not(:focus-visible),.pill-cta:focus:not(:focus-visible),.cta-card:focus:not(:focus-visible){outline:none}
+/* agency reel: title and link in one row above the film; the film stays clean */
+.reelhead{padding:clamp(20px,2.2vw,32px);gap:18px}
+.rh-row{flex-direction:row!important;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.rh-row .rh-h{font-size:clamp(22px,2vw,30px);letter-spacing:-.03em;margin:0}
+.rh-row .work-link{margin-top:0;flex:none}
+.reelhead .reelbox{aspect-ratio:2.15/1;border-radius:18px}
+@media (max-width:760px){.reelhead .reelbox{aspect-ratio:16/10}.rh-row{gap:12px}}
+
+#mod-hero .hero-sub{max-width:24ch;font-size:clamp(22px,2.2vw,32px);line-height:1.12;letter-spacing:-.025em}
+@media (max-width:760px){#mod-hero .hero-sub{font-size:22px;max-width:none}}
+.h-hero{white-space:pre-line}
+.reelhead .reelvid{object-position:50% 88%}
+
+/* ======================= v3.2 ======================= */
+/* back to main: a clean white circle, the arrow drawn and centred */
+.nav .home{border:0;box-shadow:none;width:44px;height:44px}
+.nav .home svg{display:block}
+.nav .home:focus:not(:focus-visible){outline:none}
+
+/* statements: title on top; picture, line and link sit together at the bottom, so neighbours line up */
+.stmt{justify-content:flex-start;gap:0}
+.stmt .stmt-viz2{margin-top:auto;padding-top:26px;min-height:0}
+.stmt .stmt-viz2 + .stmt-s{margin-top:20px}
+.stmt .stmt-h + .stmt-s{margin-top:auto;padding-top:26px}
+.stmt .stmt-s + .stmt-link{margin-top:18px}
+.stmt-link{align-self:flex-start}
+.t-sky .stmt-link{background:var(--navy);color:#fff}
+.stmt-viz2 .vf{max-width:250px}
+
+/* optical weight: white on navy reads heavier than navy on light, so the two are tuned to look the same */
+.t-navy .stmt-h,.t-grad .stmt-h,.t-navy .feat-h,.t-navy .h-m{font-weight:470}
+.t-sky .stmt-h,.t-grey .stmt-h,.t-light .stmt-h,.t-white .stmt-h,.t-sky .h-m,.t-grey .h-m,.t-light .h-m{font-weight:530}
+
+/* every format: languages are back, set small and quiet inside the picture */
+.vf-lang{display:block;top:9%;right:9%;font:600 7.5px/1 var(--font);letter-spacing:.06em;color:#0C2B3F;background:rgba(255,255,255,.75);border-radius:3px;padding:2px 3px}
+.vf-c:nth-child(-n+2) .vf-lang{display:none}
+@media (max-width:760px){.vf-lang{display:none!important}}
+/* rows can swap sides so dark and light tiles alternate down the page */
+.sub.flip > :first-child{order:2}
+/* white tile with a hairline for quiet notes between coloured rows */
+.t-white{background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+/* people check on a light tile */
+.t-grey .vchk i,.t-sky .vchk i{background:#fff;box-shadow:0 1px 0 rgba(12,43,63,.08),inset 0 0 0 1px rgba(12,43,63,.08)}
+.t-grey .vchk i::before,.t-sky .vchk i::before{background:linear-gradient(135deg,#CFEFFC,#7FB6D3)}
+.t-grey .vchk i::after,.t-sky .vchk i::after{background:rgba(12,43,63,.55);box-shadow:0 -7px 0 0 rgba(12,43,63,.18)}
+.t-grey .vf-card{box-shadow:0 1px 0 rgba(12,43,63,.08),inset 0 0 0 1px rgba(12,43,63,.06)}
+
+/* ======================= v3.3: review fixes ======================= */
+/* hero subline: one size on all three pages */
+#mod-hero .hero-sub{max-width:26ch;font-size:clamp(21px,2vw,30px);line-height:1.15;letter-spacing:-.022em;font-weight:500}
+@media (max-width:760px){#mod-hero .hero-sub{font-size:20px;max-width:none}}
+
+/* pricing head: two clean lines, the "included" sentence closes the tile */
+.price-h{white-space:pre-line}
+.price-head{justify-content:space-between}
+.price-incl{margin:0;font:400 16px/1.4 var(--font);color:#BFD3E0;max-width:26ch;text-wrap:pretty}
+@media (max-width:760px){.price-incl{font-size:14px}}
+/* plan cards: same label row height, so all three prices share a baseline */
+.plan-top{height:26px}
+
+/* add-on: label on top, everything white sits in the dark lower half */
+.addon2{grid-template-rows:auto 1fr auto auto}
+.ad2-txt > .ad2-l{grid-column:1;grid-row:1}
+.ad2-txt > .h-l{grid-column:1;grid-row:3 / 5;align-self:end}
+.ad2-txt > .lead{grid-column:2;grid-row:3;align-self:end}
+.ad2-act{grid-column:2;grid-row:4}
+@media (max-width:760px){.ad2-txt > .ad2-l,.ad2-txt > .h-l,.ad2-txt > .lead,.ad2-act{grid-row:auto}}
+
+/* agency plan: the rate inside the plan tile, the pricing idea heads the list */
+.ap-price{display:flex;flex-direction:column;gap:6px}
+.ap-price .price{font:500 clamp(40px,4vw,60px)/1 var(--font);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.ap-pl{color:#BFD3E0;font-size:17px}
+.ap-lh{margin:2px 0 6px}
+
+/* timeline rows: day and step on one baseline; short last lines avoided */
+.drow{align-items:baseline}
+.drow .dbar{align-self:start;padding-top:8px}
+.drow .muted,.qa .a,.rows .b,.feat .muted{text-wrap:pretty}
+.yrs-t{max-width:none}
+
+/* smaller "1 concept =" inside the department tiles, under the tile headline */
+.cdef-row .cdef-k{font-size:clamp(28px,2.4vw,34px)}
+
+/* form */
+textarea{resize:none}
+.form-short .submit{border-radius:999px}
+
+/* nav logo lines up with the content of the tiles below */
+.nav{padding-left:clamp(24px,3vw,43px)}
+
+/* phone: the two tiles under the hero stack; CTA bar floats, aligned to the gutter, only after the hero button is gone */
+@media (max-width:760px){
+  #mod-s1,#mod-s2{grid-column:span 12!important}
+  .stmt{min-height:0}
+  .stmt .stmt-h + .stmt-s{padding-top:14px}
+  .stmt-link{max-width:100%}
+  .mcta{background:none;backdrop-filter:none;box-shadow:none;padding:0 var(--gut-r) calc(12px + env(safe-area-inset-bottom,0px)) var(--gut-l);transition:opacity .25s,transform .25s}
+  .mcta button{border-radius:999px;box-shadow:0 10px 30px rgba(8,31,46,.28)}
+  body.hero-cta-in-view .mcta{opacity:0;transform:translateY(12px);pointer-events:none}
+}
+.price-h{font-size:clamp(20px,1.75vw,26px)}
+.rows .row{align-items:baseline}
+@media (max-width:760px){.h-hero{font-size:clamp(28px,8vw,44px)}}
+
+/* ======================= v3.4: premium pass ======================= */
+/* hero gradient: a deeper sky at the top so the white slogan holds; same family, same navy floor */
+.t-grad{background-image:var(--noise),linear-gradient(180deg,#8EBFD8 0%,#6F9DB7 26%,#38596F 56%,#0C2B3F 80%,#0C2B3F 100%)}
+.h-hero{text-shadow:0 1px 18px rgba(12,43,63,.12)}
+
+/* one orchestrated entrance: the slogan sharpens out of blur, the first tiles follow in a short wave */
+@media (prefers-reduced-motion:no-preference){
+  .hero .h-hero{animation:blurIn .7s cubic-bezier(.16,1,.3,1) .25s both}
+  .hero .bottom{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .55s both}
+  .grid > .mod:nth-child(2){animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .45s both}
+  .grid > .mod:nth-child(3){animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .55s both}
+  .grid > .mod:nth-child(4){animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .65s both}
+}
+@keyframes lineIn{from{transform:scaleX(0)}}
+@keyframes blurIn{from{opacity:0;filter:blur(10px);transform:translateY(6px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}}
+
+/* typography: figures line up, no orphans, consistent rhythm */
+.price,.big,.yrs-n,.cdef-k,.ap-price .price,.drow .dd,.track .node{font-variant-numeric:tabular-nums lining-nums}
+p,.lead,.muted,.stmt-s{text-wrap:pretty}
+.h-xl,.h-l,.h-m,.stmt-h,.path-h,.cdef-v{text-wrap:balance}
+body{font-feature-settings:"kern","liga","calt"}
+
+/* keyboard focus: one visible ring everywhere, never on mouse click */
+:where(a,button,[role="button"],input,textarea,.plan,.qa .q):focus-visible{outline:2px solid #2C7BE5;outline-offset:3px}
+:where(a,button,[role="button"],.plan):focus:not(:focus-visible){outline:none}
+
+/* form states */
+.done{background:#DDF3E6;color:#1F7A4D;border-radius:14px;padding:14px 18px;font-weight:500}
+.err{color:#C8331A;font-weight:500}
+input[aria-invalid="true"]{box-shadow:inset 0 0 0 1.5px #C8331A}
+@media (max-width:760px){
+  .addon2{grid-template-columns:minmax(0,1fr);grid-template-rows:none;gap:14px}
+  .ad2-txt > .ad2-l,.ad2-txt > .h-l,.ad2-txt > .lead,.ad2-act{grid-column:1!important;grid-row:auto!important}
+  .ad2-l{white-space:nowrap}
+  .addon2 .h-l{margin-top:28px}
+}
+@media (max-width:760px){.feat-grid > .tile:nth-child(3):last-child{order:-1}}
+
+/* ======================= v3.5 ======================= */
+/* every format: cards in the live site's colours (navy card, white line, amber button), today's thin weights */
+.vf-card,.t-grey .vf-card{background:var(--navy);box-shadow:0 2px 6px -2px rgba(12,43,63,.28)}
+.vf-card .im{background:linear-gradient(135deg,#B4E4FA,#5E9BBE)}
+.vf-card .ln{background:#fff}
+.vf-card .bt{background:#F2A33A}
+.vf-lang{color:#fff;background:rgba(255,255,255,.18)}
+.t-navy .vf-card{background:#fff;box-shadow:none}
+.t-navy .vf-card .ln{background:var(--navy)}
+.t-navy .vf-lang{color:var(--navy);background:rgba(12,43,63,.1)}
+/* add-on: a quiet printed label (thin plus + small caps), nothing that looks pressable */
+.addon2 .ad2-l{background:none;border-radius:0;padding:0 0 0 22px;position:relative;color:var(--navy);font:600 13px/1 var(--font);letter-spacing:.12em;cursor:default;user-select:none;box-shadow:none}
+.addon2 .ad2-l::before,.addon2 .ad2-l::after{content:"";position:absolute;left:0;top:50%;width:12px;height:1.5px;margin-top:-.75px;background:currentColor;border-radius:1px}
+.addon2 .ad2-l::after{transform:rotate(90deg)}

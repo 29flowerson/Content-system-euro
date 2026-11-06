@@ -21,10 +21,10 @@
     { n: 'Türkçe', c: 'tr', loc: 'tr-TR' }
   ];
   const FORMATS = [
-    { n: '9:16', c: '9x16', w: 1080, h: 1920 },
-    { n: '4:5', c: '4x5', w: 1080, h: 1350 },
-    { n: '1:1', c: '1x1', w: 1080, h: 1080 },
-    { n: '16:9', c: '16x9', w: 1920, h: 1080 }
+    { n: 'Reels', r: '9:16', c: '9x16', w: 1080, h: 1920 },
+    { n: 'Feed', r: '4:5', c: '4x5', w: 1080, h: 1350 },
+    { n: 'Post', r: '1:1', c: '1x1', w: 1080, h: 1080 },
+    { n: 'Pre-roll', r: '16:9', c: '16x9', w: 1920, h: 1080 }
   ];
   /* index order in every table below: en, es, fr, de, tr */
 
@@ -175,9 +175,9 @@
 
   /* ================= LIFESTYLE (KITE_GOOD) ================= */
   const E_LIFE = {
-    id: 'lifestyle', name: 'Lifestyle',
+    id: 'lifestyle', name: 'Product in use',
     groups: [
-      { key: 'layout', label: 'Layout', opts: [{ n: 'Field on top' }, { n: 'Field below' }, { n: 'Split' }, { n: 'Type only' }] },
+      { key: 'layout', label: 'Layout', opts: [{ n: 'Text on top' }, { n: 'Text below' }, { n: 'Split' }, { n: 'End card' }] },
       { key: 'hook', label: 'Hook', opts: LIFE.hooks.map(h => ({ n: h.n })) },
       { key: 'scene', label: 'Scene', opts: [{ n: 'Supermarket', c: 'supermarket' }, { n: 'Café terminal', c: 'cafe' }, { n: 'Tram', c: 'tram' }, { n: 'Kitchen table', c: 'table' }] }
     ],
@@ -225,17 +225,20 @@
         h += hl(lines, { fs, left: m, top: H - fieldH + 40, maxW: W - m * 2 });
         if (tag) h += txt('<span class="typer" data-text="' + esc(tag) + '"></span>', { html: 1, fs: fs * 0.82, color: CREAM, right: m, bottom: 60, cls: 'b8' });
         else if (small) h += txt(small, { html: 1, fs: fs * 0.62, color: CREAM, left: m, bottom: 60, cls: 'b8', maxW: W - m * 2 });
-      } else if (false) { /* (unused) tall split, looked like 'Field below'; 9:16 now uses the side-by-side split below: photo column on the left, the field column widens across the bottom */
-        const cx = Math.round(W * 0.64), step = Math.round(H * 0.64);
-        h += video(0, 0, cx + 2, step + 2, '42% 50%');
-        h += field(cx, 0, W - cx, H, OR_L, 'right', W / (W - cx)) + tab(0, step, cx + 12, H - step, OR_L, 'left-top');
+      } else if (F.c === '9x16') { /* 9:16 split turned vertical: the photo takes the top half, the field the bottom half; the split's narrow tab rises from the field on the right (the column tab of KITE_GOOD 2_3, turned 90°) */
+        const cy = Math.round(H * 0.5);
+        h += video(0, 0, W, cy + 2, '50% 45%');
+        h += field(0, cy, W, H - cy, OR_L, 'bottom', H / (H - cy)) + tab(Math.round(W * 0.70), cy - 34, Math.round(W * 0.25), 46, OR_L, 'up');
         h += logo(CREAM, 110, 68, 69, 'filter:drop-shadow(0 2px 10px rgba(0,0,0,.25))');
-        h += hl(lines, { fs, left: m, top: step + 70, maxW: W - m * 2, plain: 1, fg: CREAM });
-        if (list) h += hl(list, { fs: fs * 0.6, left: m, top: step + 70 + fs * 2.75, maxW: W - m * 2, delay: 0.3 });
-        else if (sub) h += txt(esc(sub), { html: 1, fs: fs * 0.6, color: CREAM, left: m, top: step + 70 + fs * 2.75, cls: 'b8', maxW: W - m * 2 });
-        if (tag) h += txt('<span class="typer" data-text="' + esc(tag) + '"></span>', { html: 1, fs: fs * 0.78, color: CREAM, right: m, bottom: 80, cls: 'b8' });
+        const fsS = fs * 1.24, top = cy + 104;
+        h += hl(lines, { fs: fsS, left: m, top, maxW: W - m * 2, plain: 1, fg: CREAM });
+        const y2 = top + lines.length * fsS * 1.08 + 44;
+        if (list) h += hl(list, { fs: fs * 0.6, left: m, top: y2, maxW: W - m * 2, delay: 0.3 });
+        else if (sub) h += txt(esc(sub), { html: 1, fs: fs * 0.7, color: CREAM, left: m, top: y2, cls: 'b8', maxW: W - m * 2 });
+        if (tag) h += txt('<span class="typer" data-text="' + esc(tag) + '"></span>', { html: 1, fs: fs * 0.82, color: CREAM, left: m, top: y2, cls: 'b8' });
+        h += hl([LIFE.cta[li]], { fs: fs * 0.66, left: m, bottom: 120, maxW: W - m * 2, delay: 0.45, cls: 'caps' });
       } else { /* split: photo left, field column right; a short rounded tab sticks out of the column low on the left (KITE_GOOD 2_3: 34px wide, 72%–96% of the height) */
-        const cx = Math.round(W * (wide ? 0.56 : F.c === '9x16' ? 0.40 : 0.531)), step = Math.round(H * (F.c === '9x16' ? 0.24 : 0.28));
+        const cx = Math.round(W * (wide ? 0.56 : 0.531)), step = Math.round(H * 0.28);
         h += video(0, 0, cx + 2, H, '35% 50%');
         h += field(cx, 0, W - cx, H, OR_L, 'right', W / (W - cx)) + tab(cx - 34, Math.round(H * 0.722), 46, Math.round(H * 0.241), OR_L, 'left');
         h += logo(CREAM, 110, 68, 69, 'filter:drop-shadow(0 2px 10px rgba(0,0,0,.25))');
@@ -244,7 +247,6 @@
         if (list) h += hl(list, { fs: fs * 0.56, left: cx + 20, top: step + 40 + fs * 0.9 * 2.6, maxW: cw, delay: 0.3 });
         else if (sub) h += txt(esc(sub), { html: 1, fs: fs * 0.58, color: CREAM, left: cx + 20, top: step + 40 + fs * 0.9 * 2.6, cls: 'b8', maxW: cw });
         if (tag) h += txt('<span class="typer" data-text="' + esc(tag) + '"></span>', { html: 1, fs: fs * 0.78, color: CREAM, right: wide ? 72 : 48, bottom: 60, cls: 'b8' });
-        else h += hl([LIFE.cta[li]], { fs: fs * (F.c === '9x16' ? 0.68 : 0.56), left: cx + 20, bottom: wide ? 72 : 80, maxW: cw, delay: 0.45, cls: 'caps' }); /* fills the empty column with the call to action */
       }
       return { html: h, bg: OR_L };
     }
@@ -252,9 +254,9 @@
 
   /* ================= STUDIO (KITE_GOOD_3) ================= */
   const E_STUDIO = {
-    id: 'studio', name: 'Studio',
+    id: 'studio', name: 'Product showcase',
     groups: [
-      { key: 'set', label: 'Still life', opts: [{ n: 'Groceries', c: 'supermarket' }, { n: 'Coffee', c: 'cafe' }, { n: 'Breakfast', c: 'table' }, { n: 'Commute', c: 'tram' }] },
+      { key: 'set', label: 'Product set', opts: [{ n: 'Groceries', c: 'supermarket' }, { n: 'Coffee', c: 'cafe' }, { n: 'Breakfast', c: 'table' }, { n: 'Commute', c: 'tram' }] },
       { key: 'hook', label: 'Hook', opts: STUDIO.hooks.map(h => ({ n: h.n })) },
       { key: 'cta', label: 'Call to action', opts: STUDIO.ctas.map(c => ({ n: c.n })) }
     ],
@@ -267,42 +269,44 @@
       if (wide) {
         const fx = 1180;
         h += vid(-30, -80, 1240);
+        h += `<div class="studio-vig"></div>`;
         h += field(fx, 0, W - fx, H, OR, 'right', W / (W - fx)) + tab(fx - 54, 30, 70, 477, OR, 'left');
         h += logo(CREAM, 108, 72, 59);
         h += hl(lines, { fs: 64, left: fx + 72, top: 120, maxW: W - fx - 144 });
         h += txt(cta, { fs: 40, color: CREAM, left: fx + 72, bottom: 96, cls: 'caps b8', maxW: W - fx - 144 });
-        return { html: h, bg: '#050504' };
+        return { html: h, bg: '#121110' };
       }
       const ft = Math.round(H * ({ '9x16': 0.75, '4x5': 0.72, '1x1': 0.66 })[F.c]);
       const fs = ({ '9x16': 68, '4x5': 64, '1x1': 58 })[F.c];
       /* the still life sits between 25% and 77% of the square loop: keep it clear of the logo and the field in every format */
       const P = ({ '9x16': [-150, 141, 1380], '4x5': [0, -21, 1080], '1x1': [40, -90, 1000] })[F.c];
       h += vid(P[0], P[1], P[2]);
+      h += `<div class="studio-vig"></div>`;
       h += field(0, ft, W, H - ft, OR, 'bottom', H / (H - ft)) + tab(30, ft - 54, 477, 70, OR, 'up');
       h += logo(CREAM, 108, 72, 59);
       h += hl(lines, { fs, left: 106, top: ft + 46, maxW: W - 170 });
       h += txt(cta, { fs: 40, color: CREAM, left: 108, bottom: Math.max(64, (H - ft) * 0.22), cls: 'caps b8', maxW: W - 90 });
-      return { html: h, bg: '#050504' };
+      return { html: h, bg: '#121110' };
     }
   };
 
   /* ================= 3D OBJECT (KITE_GOOD_5) ================= */
   const E_OBJ = {
-    id: 'object', name: '3D object',
+    id: 'object', name: 'Scroll-stopper',
     groups: [
       { key: 'obj', label: 'Object', opts: OBJ.objects.map(o => ({ n: o.n })) },
       { key: 'hook', label: 'Hook', opts: OBJ.hooks.map(h => ({ n: h.n })) },
       { key: 'motion', label: 'Motion', opts: [{ n: 'Float' }, { n: 'Spin' }, { n: 'Glide' }, { n: 'Tumble' }] }
     ],
     init: { obj: 0, hook: 0, motion: 0, lang: 0, format: 1 },
-    /* proportions from KITE_GOOD_5 (4:5): field top at 42.4% of the height, tab 99px tall from 59.7% of the width to 55px off the right edge */
+    /* proportions from KITE_GOOD_5 (4:5): field top at 42.4% of the height, tab as tall as the other styles (50px) from 59.7% of the width to 55px off the right edge */
     geo(F) {
       const { w: W, h: H } = F, wide = W > H;
       const G = wide ? { base: H * 0.45, ox: W * 0.50, size: 400, fs: 88, tx: 108, cta: 92, maxW: W * 0.5, tabL: W * 0.62, lift: 0.10, gap: 118 }
         : ({ '9x16': { base: H * 0.43, ox: W * 0.49, size: 540, fs: 112, tx: 108, cta: 200, maxW: W - 216, tabL: W * 0.597, lift: 0.08, gap: 270 },
           '4x5': { base: H * 0.4237, ox: W * 0.49, size: 460, fs: 101, tx: 108, cta: 132, maxW: W - 216, tabL: W * 0.597, lift: 0.08, gap: 203 },
           '1x1': { base: H * 0.43, ox: W * 0.47, size: 360, fs: 86, tx: 108, cta: 80, maxW: W - 216, tabL: W * 0.597, lift: 0.12, gap: 130 } })[F.c];
-      G.tabR = W - 55; G.tabTop = G.base - (wide ? 99 : 50); /* portrait/square: shorter tab, like the other styles */ G.ty = G.base + G.gap;
+      G.tabR = W - 55; G.tabTop = G.base - 50; G.ty = G.base + G.gap;
       return G;
     },
     render(s, F, li) {
@@ -319,11 +323,11 @@
 
   /* ================= KNIT (KITE_GOOD_6) ================= */
   const E_KNIT = {
-    id: 'knit', name: 'Knit',
+    id: 'knit', name: 'Brand story',
     groups: [
-      { key: 'item', label: 'Embroidery', opts: KNIT.items.map(i => ({ n: i.n })) },
+      { key: 'item', label: 'Picture', opts: KNIT.items.map(i => ({ n: i.n })) },
       { key: 'hook', label: 'Hook', opts: KNIT.hooks.map(h => ({ n: h.n })) },
-      { key: 'type', label: 'Type', opts: [{ n: 'Bottom left' }, { n: 'Top left' }, { n: 'Bottom right' }, { n: 'Centred' }] }
+      { key: 'type', label: 'Text position', opts: [{ n: 'Bottom left' }, { n: 'Top left' }, { n: 'Bottom right' }, { n: 'Centered' }] }
     ],
     init: { item: 0, hook: 0, type: 0, lang: 0, format: 1 },
     frames(it, F) {
@@ -360,10 +364,10 @@
 
   /* ================= APP SCREEN (KITE_GOOD_4 / 4_2) ================= */
   const E_APP = {
-    id: 'app', name: 'App screen',
+    id: 'app', name: 'App install',
     groups: [
       { key: 'hook', label: 'Hook', opts: APP.hooks.map(h => ({ n: h.n })) },
-      { key: 'screen', label: 'Spending', opts: APP.screens.map(x => ({ n: x.n })) },
+      { key: 'screen', label: 'Purchases', opts: APP.screens.map(x => ({ n: x.n })) },
       { key: 'view', label: 'Screen', opts: APP.views.map(v => ({ n: v.n })) }
     ],
     init: { hook: 0, screen: 0, view: 0, lang: 0, format: 1 },
@@ -383,9 +387,10 @@
     band(W, bH, tabX, tabW, vertical) {
       const d = vertical ? bandPathV(W, bH, tabX, tabW) : bandPath(W, bH, tabX, tabW);
       const vw = vertical ? W + 60 : W, vh = vertical ? bH : bH + 60;
-      return `<svg class="band" viewBox="0 0 ${vw} ${vh}" style="width:${px(vw)};height:${px(vh)}" preserveAspectRatio="none"><defs><filter id="rough" x="-5%" y="-2%" width="110%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="${vertical ? '.6 .035' : '.035 .6'}" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/></filter>` +
-        `<filter id="paper" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="7"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .1  0 0 0 0 .02  0 0 0 -1.5 .9"/><feComposite in2="SourceGraphic" operator="in"/></filter></defs>` +
-        `<g filter="url(#rough)"><path d="${d}" fill="${OR}"/><path d="${d}" fill="${OR}" filter="url(#paper)" opacity=".5"/></g></svg>`;
+      /* clean edge with the same 16px corners as every other tab; grain kept visible so the band still reads as paper */
+      return `<svg class="band" viewBox="0 0 ${vw} ${vh}" style="width:${px(vw)};height:${px(vh)}" preserveAspectRatio="none"><defs>` +
+        `<filter id="paper" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" seed="7"/><feColorMatrix values="0 0 0 0 .45  0 0 0 0 .08  0 0 0 0 .02  0 0 0 -2.4 1.45"/><feComposite in2="SourceGraphic" operator="in"/></filter></defs>` +
+        `<path d="${d}" fill="${OR}"/><path d="${d}" fill="${OR}" filter="url(#paper)" opacity=".85"/></svg>`;
     },
     render(s, F, li) {
       const { w: W, h: H } = F, wide = W > H;
@@ -417,10 +422,10 @@
   };
   /* vertical band for 16:9: ragged right edge, rounded tab sticking out to the right near the top */
   function bandPathV(bw, H, ty, th) {
-    return `M0 0 H${bw} V${ty} H${bw + 40} Q${bw + 50} ${ty} ${bw + 50} ${ty + 10} V${ty + th - 10} Q${bw + 50} ${ty + th} ${bw + 40} ${ty + th} H${bw} V${H} H0 Z`;
+    return `M0 0 H${bw} V${ty} H${bw + 34} Q${bw + 50} ${ty} ${bw + 50} ${ty + 16} V${ty + th - 16} Q${bw + 50} ${ty + th} ${bw + 34} ${ty + th} H${bw} V${H} H0 Z`;
   }
   function bandPath(W, bH, tx, tw) {
-    return `M0 0 H${W} V${bH} H${tx + tw} V${bH + 40} Q${tx + tw} ${bH + 50} ${tx + tw - 10} ${bH + 50} H${tx + 10} Q${tx} ${bH + 50} ${tx} ${bH + 40} V${bH} H0 Z`;
+    return `M0 0 H${W} V${bH} H${tx + tw} V${bH + 34} Q${tx + tw} ${bH + 50} ${tx + tw - 16} ${bH + 50} H${tx + 16} Q${tx} ${bH + 50} ${tx} ${bH + 34} V${bH} H0 Z`;
   }
 
   const ENGINES = [E_LIFE, E_STUDIO, E_OBJ, E_KNIT, E_APP];
@@ -536,7 +541,7 @@
     /* the KITE_GOOD_5 split, measured off the reference: a flat field with one raised, rounded tab on the right.
        It never changes shape; on a new layout it rises into place from the bottom. */
     edgeParams() {
-      const k = Math.min(1, (performance.now() - this.edge.t) / 600), e = 1 - Math.pow(1 - k, 3);
+      const k = Math.min(1, (performance.now() - this.edge.t) / 480), e = 1 - Math.pow(1 - k, 4);
       const off = this.edge.rise ? (1 - e) * (this.H - this.g.base + 120) : 0;
       return [0, off];
     }
@@ -619,7 +624,7 @@ button{font:inherit;color:inherit}
 .ctrl{background:var(--grey);justify-content:center}
 .preview{background:linear-gradient(180deg,#F3FBFF 0%,#B4E4FA 100%);justify-content:space-between;gap:20px}
 .label{font:500 13px/1.2 var(--font);letter-spacing:.06em;text-transform:uppercase;opacity:.75}
-.h-m{font:650 clamp(22px,1.9vw,28px)/1.12 var(--font);letter-spacing:-.025em;text-wrap:balance}
+.h-m{font:500 clamp(22px,1.9vw,28px)/1.12 var(--font);letter-spacing:-.025em;text-wrap:balance}
 .head{display:flex;flex-direction:column;gap:12px}
 .small{font-size:15px}.muted{color:var(--muted)}
 .autorow{display:flex;align-items:center;gap:12px}
@@ -634,15 +639,40 @@ button{font:inherit;color:inherit}
 .pills{display:flex;flex-wrap:wrap;gap:8px}
 .pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:16px;cursor:pointer;color:var(--ink);white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
 .pill[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.pill:hover{border-color:var(--navy)}
+.pill[aria-pressed="true"]:hover{background:#1D4A66;border-color:#1D4A66}
+.group.is-style .pill[aria-pressed="true"]:hover{background:#D97506;border-color:#D97506}
+.pill small{font-size:12px;margin-left:7px;opacity:.55;font-variant-numeric:tabular-nums}
+.now{display:none}
 .group.is-style .pill[aria-pressed="true"]{background:#EA8007;border-color:#EA8007}
 .group.is-style{padding-bottom:14px;border-bottom:1px solid rgba(12,43,63,.12)}
 .stage{flex:1;display:grid;place-items:center;min-height:440px;position:relative}
 .readout{border-top:1px solid rgba(12,43,63,.15);padding-top:16px;display:flex;flex-direction:column;gap:6px}
 .readout b{font-weight:700;font-variant-numeric:tabular-nums}
-@media (max-width:900px){.eng{grid-template-columns:1fr;gap:0}.tile.ctrl{padding:24px 20px 8px;border-radius:var(--r) var(--r) 0 0}.preview{background:var(--grey);border-radius:0 0 var(--r) var(--r);padding:16px 20px 24px}.stage{flex:none;min-height:0;height:min(64vh,560px)}}
+@media (max-width:900px){.eng{grid-template-columns:1fr;gap:0}.tile.ctrl{padding:28px 20px 16px;border-radius:var(--r) var(--r) 0 0;gap:18px}.preview{border-radius:0 0 var(--r) var(--r);padding:8px 16px 22px;gap:14px}.stage{flex:none;min-height:0}}
+/* phone: only the style is picked by hand; inside a style the variations run on their own and a caption names what just changed */
+@media (max-width:760px){
+.autorow{display:none}
+.group.is-style{padding-bottom:0;border-bottom:0}
+.group.is-style{gap:10px}
+/* all five styles visible at once, two rows, nothing cut off at the edge */
+.group.is-style .pills{flex-wrap:wrap;gap:6px}
+.group.is-style .pill{padding:8px 12px;font-size:14px}
+.now{display:flex;align-items:center;justify-content:center;gap:10px;min-height:40px;font-size:15px}
+.now .nk{font:500 12px/1 var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.now .nv{font-weight:600;font-size:16px;letter-spacing:-.01em;animation:nv .45s cubic-bezier(.2,.7,.2,1) both}
+.now .dots{display:flex;gap:5px;margin-left:4px}
+.now .dots i{width:6px;height:6px;border-radius:9px;background:rgba(12,43,63,.2)}
+.now .dots i.on{background:#EA8007}
+@keyframes nv{from{opacity:0;transform:translateY(6px)}}
+.readout{text-align:center}
+}
 
 /* ---------- the ad: drawn at real ad size (1080 or 1920 px wide) and scaled to the stage ---------- */
 .adbox{position:relative;flex:none;border-radius:14px;overflow:hidden;box-shadow:0 22px 60px rgba(10,30,60,.25);isolation:isolate}
+/* the frame snaps from one format to the next; the new ad already fills it the whole way (no fade, no empty frame) */
+.adbox{transition:width .42s cubic-bezier(.22,1,.36,1),height .42s cubic-bezier(.22,1,.36,1)}
+@media (prefers-reduced-motion:reduce){.adbox{transition:none}}
 .ad{position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden;font-family:'Schibsted Grotesk','Inter Tight',Arial,sans-serif;color:#fff;contain:strict}
 .ad *{position:absolute}
 .ad .rc{display:block}
@@ -650,8 +680,11 @@ button{font:inherit;color:inherit}
 .logo{-webkit-mask:var(--logo) left center/contain no-repeat;mask:var(--logo) left center/contain no-repeat;z-index:6}
 .media{overflow:hidden;z-index:1}
 .media video,.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.media.plate{-webkit-mask:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%),linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%),linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-composite:intersect}
-.studio-bg{inset:0;background:#050504}
+.media.plate{-webkit-mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.12) 5%,rgba(0,0,0,.45) 11%,rgba(0,0,0,.8) 17%,#000 23%,#000 77%,rgba(0,0,0,.8) 83%,rgba(0,0,0,.45) 89%,rgba(0,0,0,.12) 95%,transparent 100%),linear-gradient(180deg,transparent 0,rgba(0,0,0,.12) 6%,rgba(0,0,0,.45) 12%,rgba(0,0,0,.8) 19%,#000 26%,#000 74%,rgba(0,0,0,.8) 81%,rgba(0,0,0,.45) 88%,rgba(0,0,0,.12) 94%,transparent 100%);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent 0,rgba(0,0,0,.12) 5%,rgba(0,0,0,.45) 11%,rgba(0,0,0,.8) 17%,#000 23%,#000 77%,rgba(0,0,0,.8) 83%,rgba(0,0,0,.45) 89%,rgba(0,0,0,.12) 95%,transparent 100%),linear-gradient(180deg,transparent 0,rgba(0,0,0,.12) 6%,rgba(0,0,0,.45) 12%,rgba(0,0,0,.8) 19%,#000 26%,#000 74%,rgba(0,0,0,.8) 81%,rgba(0,0,0,.45) 88%,rgba(0,0,0,.12) 94%,transparent 100%);mask-composite:intersect}
+/* the plate's own edges are pulled down towards the backdrop, the backdrop is lifted a little, and one soft vignette ties both together */
+.media.plate::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 62% 62% at 50% 50%,transparent 52%,rgba(14,13,12,.55) 100%);pointer-events:none}
+.studio-bg{inset:0;background:radial-gradient(ellipse 85% 75% at 50% 38%,#1B1A18 0%,#121110 50%,#080807 100%)}
+.studio-vig{inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse 95% 85% at 50% 42%,transparent 55%,rgba(0,0,0,.42) 100%)}
 .media.knit{inset:0;background:#EFD9C8}
 .media.knit img{opacity:0;transform:scale(var(--z,1))}
 .media.knit img.on{opacity:1}
@@ -732,6 +765,7 @@ button{font:inherit;color:inherit}
   </div>
   <div class="tile preview">
     <div class="stage" data-stage><div class="adbox" data-adbox><div class="ad" data-ad></div></div></div>
+    <p class="now" data-now aria-live="polite"></p>
     <div class="readout"><p class="small" data-combo></p></div>
   </div>
 </div>`;
@@ -768,13 +802,15 @@ button{font:inherit;color:inherit}
       const h2 = this.getAttribute('heading2');
       this.$('[data-heading]').innerHTML = esc(hd) + (h2 ? `<br><span class="muted">${esc(h2)}</span>` : '');
       this.$('[data-autotext]').textContent = this.getAttribute('auto-text') || 'Auto demo. Tap any option to take over.';
-      this.comboText = this.getAttribute('combo') || 'possible variations from one concept. Every delivered asset reviewed by our team.';
+      this.comboText = this.getAttribute('combo') || 'Every file we deliver is checked by our experts.';
       this.pool = {};
-      this.auto = this.getAttribute('autoplay') !== 'false' && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+      this.reduced = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+      this.auto = this.getAttribute('autoplay') !== 'false' && !this.reduced;
       this.$('[data-auto]').setAttribute('aria-checked', String(this.auto));
       this.$('[data-auto]').addEventListener('click', () => { this.auto = !this.auto; this.$('[data-auto]').setAttribute('aria-checked', String(this.auto)); });
       this.$('[data-groups]').addEventListener('click', e => {
         const b = e.target.closest('.pill'); if (!b) return;
+        if (this.mob) { this.set(b.dataset.g, +b.dataset.i); this.mi = -1; this.nowLine(); return; }
         this.auto = false; this.$('[data-auto]').setAttribute('aria-checked', 'false');
         this.set(b.dataset.g, +b.dataset.i);
       });
@@ -782,13 +818,14 @@ button{font:inherit;color:inherit}
       this.lockCtrl();
       this.render();
       if (document.fonts) document.fonts.ready.then(() => { this.lockCtrl(); this.fit(); });
-      let lw = innerWidth;
-      this.onResize = () => { if (innerWidth !== lw) { lw = innerWidth; this.lockCtrl(); } this.fit(); };
+      let lw = innerWidth, lm = this.mob;
+      this.onResize = () => { if (innerWidth !== lw) { lw = innerWidth; if (this.mob !== lm) { lm = this.mob; this.buildGroups(false); this.nowLine(); } this.lockCtrl(); } this.fit(); };
       addEventListener('resize', this.onResize);
       this.ro = new ResizeObserver(() => this.fit()); this.ro.observe(this.$('[data-stage]'));
       this.io = new IntersectionObserver(es => { this.visible = es[0].isIntersecting; this.playState(); if (this.visible && !this.warmed) { this.warmed = true; setTimeout(() => this.preloadKnit(FORMATS[this.S.format]), 2500); } }, { threshold: 0.15 });
       this.io.observe(this);
-      this.timer = setInterval(() => this.autoStep(), 2400);
+      this.timer = setInterval(() => this.autoStep(), this.mob ? 2600 : 2400);
+      this.nowLine();
       this.steps = 0;
     }
     disconnectedCallback() { removeEventListener('resize', this.onResize); clearInterval(this.timer); this.ro && this.ro.disconnect(); this.io && this.io.disconnect(); this.stopKnit(); if (this.obj) { this.obj.destroy(); this.obj = null; } }
@@ -802,14 +839,19 @@ button{font:inherit;color:inherit}
       this.style_ = cur; this.buildGroups(false);
       ctrl.style.minHeight = mx + 'px';
     }
+    get mob() { return !!(window.matchMedia && matchMedia('(max-width:760px)').matches); }
     get E() { return ENGINES[this.style_]; }
     get S() { return this.states[this.style_]; }
     buildGroups(anim) {
       const E = this.E, S = this.S;
-      const pills = (g, opts, cur) => opts.map((o, i) => `<button class="pill" type="button" data-g="${g}" data-i="${i}" aria-pressed="${i === cur}">${esc(o.n)}</button>`).join('');
-      let h = `<div class="group is-style"><p class="label">Style</p><div class="pills">${pills('style', ENGINES.map(e => ({ n: e.name })), this.style_)}</div></div>`;
-      E.all.forEach((g, k) => { h += `<div class="group${anim ? ' sw' : ''}" style="--gi:${k}"><p class="label">${esc(g.label)}</p><div class="pills">${pills(g.key, g.opts, S[g.key])}</div></div>`; });
+      const pills = (g, opts, cur) => opts.map((o, i) => `<button class="pill" type="button" data-g="${g}" data-i="${i}" aria-pressed="${i === cur}">${esc(o.n)}${o.r ? `<small>${o.r}</small>` : ''}</button>`).join('');
+      let h = `<div class="group is-style"><p class="label">Concepts</p><div class="pills">${pills('style', ENGINES.map(e => ({ n: e.name })), this.style_)}</div></div>`;
+      if (!this.mob) E.all.forEach((g, k) => { h += `<div class="group${anim ? ' sw' : ''}" style="--gi:${k}"><p class="label">${esc(g.label)}</p><div class="pills">${pills(g.key, g.opts, S[g.key])}</div></div>`; });
       this.$('[data-groups]').innerHTML = h;
+      if (this.mob) { /* keep the chosen style in view in the scrolling row */
+        const row = this.$('.group.is-style .pills'), on = row && row.querySelector('[aria-pressed="true"]');
+        if (on) row.scrollLeft += on.getBoundingClientRect().left - row.getBoundingClientRect().left - (row.clientWidth - on.offsetWidth) / 2;
+      }
     }
     set(key, i) {
       if (key === 'style') {
@@ -824,7 +866,17 @@ button{font:inherit;color:inherit}
       this.render(key);
     }
     autoStep() {
-      if (!this.auto || !this.visible || document.hidden) return;
+      if (!this.visible || document.hidden) return;
+      if (this.mob) { /* phone: always on (unless reduced motion), stays inside the chosen style */
+        if (this.reduced) return;
+        /* most spectacular first: formats change most often (three in a row, then every other step), then hooks, languages and the style's own switches */
+        const all = this.E.all, fmt = all.find(x => x.key === 'format');
+        const rest = ['hook', 'lang'].map(k => all.find(x => x.key === k)).concat(all.filter(x => !['format', 'hook', 'lang'].includes(x.key))).filter(Boolean);
+        const i = this.mi = (this.mi ?? -1) + 1, k = i - 3;
+        const g = i < 3 ? fmt : (k % 2 === 0 ? rest[(k / 2) % rest.length] : fmt);
+        this.set(g.key, (this.S[g.key] + 1) % g.opts.length); this.nowLine(g); return;
+      }
+      if (!this.auto) return;
       this.steps++;
       if (this.steps % 5 === 0) { this.set('style', (this.style_ + 1) % ENGINES.length); return; }
       const gs = this.E.all.filter(g => g.key !== 'lang' || Math.random() < 0.5);
@@ -832,10 +884,19 @@ button{font:inherit;color:inherit}
       let i = Math.floor(Math.random() * (g.opts.length - 1)); if (i >= this.S[g.key]) i++;
       this.set(g.key, i);
     }
+    /* phone caption: which switch just moved and its new value, plus where we are in the cycle */
+    nowLine(g) {
+      const el = this.$('[data-now]'); if (!el) return;
+      if (!this.mob) { el.innerHTML = ''; return; }
+      const all = this.E.all, cur = g || all.find(x => x.key === 'format') || all[0], o = cur.opts[this.S[cur.key]];
+      el.innerHTML = `<span class="nk">${esc(cur.label)}</span><span class="nv">${esc(o.n)}${o.r ? ' · ' + o.r : ''}</span><span class="dots">${all.map(x => `<i class="${x === cur ? 'on' : ''}"></i>`).join('')}</span>`;
+    }
     fit() {
       const F = FORMATS[this.S.format], st = this.$('[data-stage]');
       const sw = st.clientWidth;
-      if (window.matchMedia && matchMedia('(max-width:900px)').matches) st.style.height = px(Math.min(innerHeight * 0.66, sw * F.h / F.w + 8));
+      /* phone: one fixed stage height for every format, so the page never jumps while the formats cycle */
+      if (this.mob) st.style.height = px(Math.min(innerHeight * 0.62, sw * 1.25, 560));
+      else if (window.matchMedia && matchMedia('(max-width:900px)').matches) st.style.height = px(Math.min(innerHeight * 0.66, sw * 1.05, 620)); /* tablet: one height for every format too */
       else st.style.height = '';
       const sh = st.clientHeight || sw;
       const k = Math.min(sw / F.w, (sh - 4) / F.h) * 0.98;
@@ -843,7 +904,19 @@ button{font:inherit;color:inherit}
       const bw = Math.floor(F.w * k), bh = Math.floor(F.h * k);
       const box = this.$('[data-adbox]'); box.style.width = bw + 'px'; box.style.height = bh + 'px';
       const kc = Math.max((bw + 0.5) / F.w, (bh + 0.5) / F.h);
-      const ad = this.$('[data-ad]'); ad.style.width = px(F.w); ad.style.height = px(F.h); ad.style.transform = `scale(${kc})`;
+      const ad = this.$('[data-ad]'); ad.style.width = px(F.w); ad.style.height = px(F.h);
+      const cover = (cw, ch) => { const s = Math.max((cw + 0.5) / F.w, (ch + 0.5) / F.h); return `translate(${((cw - F.w * s) / 2).toFixed(2)}px,${((ch - F.h * s) / 2).toFixed(2)}px) scale(${s})`; };
+      cancelAnimationFrame(this.glideRaf);
+      /* new format: while the frame glides to its new size, the new ad covers it from the centre every frame,
+         so the change is one seamless crop-and-settle instead of a fade */
+      if (this._lastF !== undefined && this._lastF !== this.S.format && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
+        const t0 = performance.now(), step = () => {
+          ad.style.transform = cover(box.clientWidth, box.clientHeight);
+          if (performance.now() - t0 < 520) this.glideRaf = requestAnimationFrame(step); else ad.style.transform = `scale(${kc})`;
+        };
+        step();
+      } else ad.style.transform = `scale(${kc})`;
+      this._lastF = this.S.format;
       return k;
     }
     pooled(tag, src) {
@@ -887,7 +960,10 @@ button{font:inherit;color:inherit}
         cv.replaceWith(this.objCanvas);
         this.obj.svgPath = ad.querySelector('svg.edge path');
         this.obj.host = ad;
-        this.obj.show(Object.assign({ rise: !key || key === 'style' || key === 'format' }, out.three), F.w, F.h, k);
+        /* the field rises in only when the style first appears; on a format change it stays put and the frame glides around it */
+        this.obj.show(Object.assign({ rise: !key || key === 'style' }, out.three), F.w, F.h, k);
+        /* draw the field in the same frame as the new markup, so a rebuild never flashes an empty background */
+        if (this.obj.svgPath && this.obj.g) this.obj.svgPath.setAttribute('d', this.obj.path(this.obj.edgeParams()));
         this.obj.paused = false;
       } else if (this.obj) { this.obj.paused = true; }
       this.fitText(ad);
@@ -896,12 +972,14 @@ button{font:inherit;color:inherit}
       if (ad.querySelector('.phone')) this.runPhone(ad.querySelector('.phone'));
       this.playState();
       /* readout */
-      this.$('[data-combo]').innerHTML = `<b>${E.total.toLocaleString('en-US')}</b> variations in this style, <b>${GRAND.toLocaleString('en-US')}</b> ${esc(this.comboText)}`;
+      this.$('[data-combo]').innerHTML = `<b>${E.total.toLocaleString('en-US')}</b> variations of this concept, <b>${GRAND.toLocaleString('en-US')}</b> across all ${ENGINES.length}. ${esc(this.comboText)}`;
     }
     /* warm the browser cache with every embroidery of the current format, so switching item or style shows the stitch loop at once */
     preloadKnit(F) {
       const K = ENGINES.find(e => e.id === 'knit'); if (!K) return;
-      const go = () => KNIT.items.forEach(it => K.frames(it, F).files.forEach(f => this.pooled('img', this.M + f)));
+      /* every item in this format, then every format of the current item, so a format change shows the loop at once */
+      const go = () => { KNIT.items.forEach(it => K.frames(it, F).files.forEach(f => this.pooled('img', this.M + f)));
+        const it = KNIT.items[this.S.item || 0]; if (it) FORMATS.forEach(f2 => K.frames(it, f2).files.forEach(f => this.pooled('img', this.M + f))); };
       (window.requestIdleCallback || (fn => setTimeout(fn, 400)))(go);
     }
     stopKnit() { this.knitTok = (this.knitTok || 0) + 1; clearInterval(this.knitTimer); this.knitTimer = 0; clearInterval(this.phoneTimer); this.phoneTimer = 0; clearInterval(this.typeTimer); }

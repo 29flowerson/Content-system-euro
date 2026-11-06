@@ -47,76 +47,97 @@ function adHTML(st){
    Module types: hero · visual · statement · engine · uses · list · steps · proof · trust · pricing · agencyplan · faq · form
    span = columns of 12; tone = navy | sky | grey | light | white */
 const PLANS = [{n:'Starter',p:'$2,740',l:'2 concepts a month'},{n:'Growth',p:'$4,390',l:'4 concepts a month'},{n:'Scale',p:'$5,990',l:'6 concepts a month'}];
-const CALCL = {label:'Your monthly output', l2:'Formats', l3:'Languages', l4:'Hooks', r1:'files a month', r2:'on'};
+const CALCL = {label:'Your monthly output', l2:'Formats', l3:'Languages', l4:'Hooks', l5:'Calls to action', r1:'files a month', r2:'on'};
 const ROLES = ['Creative direction','Art direction','Design','Motion','Copy & hooks','Localization','Quality control'];
 const PAGES = {
- main:{ nav:['How we work','Pricing','For agencies','For brands'], go:['approach','pricing','/agency','/brand'], login:false, cta:'Start a test month', modules:[
-  {id:'hero', type:'hero', span:6, h1:'Scale your content, not your team. Keep your standards.', sub:'Your external creative and production team for ongoing digital content.', k:'20% off your first month', cta:'Start a test month', link:'See how we work'},
-  {id:'make', type:'make', span:6, label:'What we do', h:'Ads and brand content, from first idea to finished assets', s:'Built for content across channels, formats and markets', items:['Performance ads','Social content','App store screenshots','Display banners','CRM & in-app','Localization']},
-  {id:'s1', type:'statement', span:3, tone:'navy', h:'Senior-level quality', s:'Every concept is developed and reviewed by experienced creatives.'},
-  {id:'s2', type:'statement', span:3, tone:'sky', viz:'formats', h:'Unlimited variations', s:'One concept, adapted across formats, sizes and languages.'},
-  {id:'engine', type:'engine', label:'Demo', h:'Explore one concept across formats and markets.',
-   order:['lang','format','hook','scene','layout'], init:{layout:1, hook:4, lang:0, scene:0, format:0}, kinit:{style:'lifestyle', format:1}, combo:'possible variations from one concept. Every delivered asset reviewed by our team.'},
-  {id:'trust', type:'trust', reel:true, label:'Trusted by teams at', rlabel:'Our work', cap:'Watch the reel: 15+ years of motion and art direction', link:'See selected work →'},
-  {id:'approach', type:'approach', label:'Your creative department', h:'Senior taste. Modern speed.', s:'One subscription covers creative direction, production and ongoing content.', roles:ROLES,
-   proof:{n:'15+', t:'years of motion and art direction. The team behind campaigns for Adobe, Google, Revolut and Veeam now runs your content.'},
-   label2:'How we work', steps:[
-    {t:'Clear direction first',s:'Goals, audience and creative direction agreed before design begins.'},
-    {t:'Concepts that fit your brand',s:'Expert art direction. Never a template.'},
-    {t:'Every version, at scale',s:'One concept adapted across formats, sizes, languages and hooks.'},
-    {t:'Quality signed off',s:'Every delivered asset reviewed and approved by our team.'}]},
-  {id:'pricing', type:'pricing', calc:true, h:'Pay for ideas. Get unlimited files.', s:'First month 20% off on any plan.', plans:PLANS, popular:1,
-   note:'Each concept can be adapted across formats, sizes, languages and hooks at no extra cost.'},
-  {id:'faq', type:'faq', label:'Questions', items:[{q:'How is this different from AI tools?',a:'AI tools can generate variations. Our team develops the concepts, directs the creative and reviews every asset.'},{q:'What does a concept include?',a:'The idea, the art direction and every version of it.'},{q:'How many files do I get?',a:'As many as you need. You pay per concept.'},{q:'How soon do we get the first files?',a:'First files in 5 days.'}],
-   extras:[{l:'Branding',t:'We build or refine your identity on request.'}]},
-  {id:'form', type:'form', label:'Next step', h:'Start with one month.', s:'Tell us your goals. We’ll show you how we’d approach them.', cta:'Get 20% off your first month',
-   ft:'Request your test month', f1:'Name', f2:'E-mail', f3:'Company & website', ph3:'Company name and website URL', f4:'I am', chips:['An agency','A brand','Not sure yet'], plan:true, f5:'Your goals (optional)', btn:'Send request', done:'Thanks! We’ve got your request and will be in touch soon.'}
+ main:{ nav:['How it works','Pricing','For agencies','For brands'], go:['approach','pricing','/agency','/brand'], login:false, cta:'Start a test month', modules:[
+  {id:'hero', type:'hero', span:6, subBig:true, h1:'Scale your content, not your team.', sub:'Your external creative and production team for ongoing digital content.', k:'20% off your first month', cta:'Start a test month'},
+  {id:'path', type:'path', span:6, h:'Ad content, from first idea to finished assets', label:'How it works', items:['Share your goals','We craft the concept','We build all versions','Experts check every file','Launch your campaign']},
+  {id:'s1', type:'statement', span:3, tone:'navy', viz:'check', h:'Art‑directed and approved by experts', s:'Your standards and quality, kept.'},
+  {id:'s2', type:'statement', span:3, tone:'grey', viz:'formats', h:'Unlimited variations', s:'One concept, adapted across formats, sizes and languages.'},
+  {id:'engine', type:'engine', label:'Live demo', h:'See how concepts become thousands of ads',
+   order:['lang','format','hook','scene','layout'], init:{layout:1, hook:4, lang:0, scene:0, format:0}, kinit:{style:'lifestyle', format:1}, combo:'Every file we deliver is checked by our experts.'},
+  {id:'trust', type:'trust', reel:true, label:'Trusted by teams at', rlabel:'Our work', cap:'Watch the reel: 15 years of motion and art direction', n:'15', nl:'years of motion and art direction', link:'See selected work →'},
+  {id:'approach', type:'conceptdays', flip:true, ck:'A concept', cv:'is one idea and its visual storytelling.', ul:'Use it for', items:['Performance ads','Social content','App store screenshots','Display banners','CRM & in-app','Localization'], s:'For every channel, format and market.',
+   label2:'How it works', h2:'Your first campaign in 5 days', days:[
+    {d:'Day 1', a:1, b:1, t:'Share your goals', s:'One call about your business, audience, markets and what success looks like.'},
+    {d:'Days 2–3', a:2, b:3, t:'We craft the concepts', s:'Senior-level ideas and art direction, built around your brand. You approve them first.'},
+    {d:'Day 4', a:4, b:4, t:'We build all versions', s:'Our engine adapts each concept to every format, size, language, hook and CTA.'},
+    {d:'Days 4–5', a:4, b:5, t:'Experts check every file', s:'Art directors review each version for brand, copy and specs.'},
+    {d:'Day 5', a:5, b:5, t:'Launch your campaign', s:'Every file ready to go. New concepts every month after that.'}]},
+  {id:'pricing', type:'pricing', calc:true, h:'Pay only for concepts.\nGet unlimited files.', s:'', plans:PLANS, popular:1,
+   note:'Every format, size, language, hook and CTA of a concept is included in the price.',
+   addonL:'Add-on', addonH:'Add branding to any plan.', addon:'Need a brand before you scale? We build or refresh your identity, tone of voice and key templates first, so every version starts on brand. Ordered separately.', addonC:'Ask about branding'},
+  {id:'faq', type:'faq', label:'Questions', items:[
+    {q:'How is this different from AI tools?',a:'AI tools can generate variations. Our team develops the concepts, directs the creative and checks every file.'},
+    {q:'What does a concept include?',a:'The idea, the art direction and every version of it.'},
+    {q:'How many files do I get?',a:'As many as you need. You pay only for concepts.'},
+    {q:'How soon do we get the first files?',a:'Within 5 days of the first call.'}]},
+  {id:'form', type:'form', label:'Next step', h:'Start with one month.', s:'Tell us what you’re working on. We’ll show you how we’d approach it.', cta:'',
+   ft:'Get 20% off your first month', short:true, f1:'Name', f2:'Email', f3:'Company & website', ph3:'Company name and website URL', f5:'Comment (optional)', ph5:'Anything you’d like us to know', btn:'Send request', done:'Thanks! We’ve got your request and will be in touch soon.'}
  ]},
- agencies:{ nav:['How we work','Agency plan'], go:['approach','plan'], login:false, cta:'Get an agency quote', modules:[
-  {id:'hero', type:'hero', span:6, h1:'More output. Same quality bar.', sub:'Your white-label creative and production team for client projects. From concept to final asset.', k:'20% off your first month', cta:'Start a test month', link:'See how we work'},
-  {id:'reel', type:'reel', span:6, label:'Our work', h:'Any style. Any brand system', cap:'15+ years in motion and art direction.', link:'See selected work →'},
-  {id:'s1', type:'statement', span:3, tone:'navy', h:'Senior-level quality', s:'Every concept is developed and reviewed by experienced creatives.'},
-  {id:'s2', type:'statement', span:3, tone:'sky', h:'Built for your clients’ brands', s:'We stay invisible. Your client sees only you.'},
-  {id:'engine', type:'engine', label:'Demo', h:'Concepts for your clients.', h2:'Across formats, languages and markets.',
-   order:['format','lang','layout','scene','hook'], init:{layout:2, hook:0, lang:3, scene:1, format:2}, kinit:{style:'object', format:2}, combo:'versions per client concept. Each one approved by a person.'},
-  {id:'solve', type:'features', items:[{t:'Handle the overflow',s:'Take on extra briefs without stretching your team.',tone:'navy'},{t:'Your quality bar, kept',s:'Senior art direction and quality checks on every file.',tone:'sky'},{t:'Fits your workflow',s:'Your briefs, your tools, your timeline.',tone:'grey'}]},
-  {id:'approach', type:'approach', label:'Your extended creative and production department', h:'Senior taste, under your name.', s:'Start in a week. No hiring, no onboarding.', roles:ROLES,
-   label2:'How white-label works', steps:[
-    {t:'You bring the brief',s:'Or just the goal. We propose the direction.'},
-    {t:'We craft the concepts',s:'Working within existing brand systems or building new ones.'},
-    {t:'We scale every version',s:'Across formats, languages and hooks.'},
-    {t:'You deliver',s:'Under your name. We stay invisible.'}]},
-  {id:'plan', type:'agencyplan', label:'Agency partner plan', h:'One partner rate. A margin you can count on.', s:'', cta:'Get an agency quote',
-   listLabel:'What’s included',
-   items:[{a:'White-label, always',b:'No Toggle branding. Delivered under your name.'},{a:'One fee per client',b:'New client, new fee. Same margin.'},{a:'A dedicated art director',b:'Learns each client’s brand system.'},{a:'Quality we stand behind',b:'Every file reviewed before it reaches you.'},{a:'NDA from day one',b:'Your clients stay your clients.'}],
-   addon:'Start with one client. Get 20% off your first month.', foot:''},
-  {id:'pricing', type:'pricing', calc:false, h:'Pay for ideas. Get unlimited files.', s:'First month 20% off.', plans:PLANS, single:{k:'Agency rate', p:'From $3,289', per:'', l:'for one client and 4 concepts per month.'},
-   note:'Pay for concepts, not variations. Add formats, languages and hooks at no extra cost.'},
-  {id:'faq', type:'faq', label:'Questions', items:[{q:'Will my client know?',a:'No. We work behind the scenes.'},{q:'Can you match each client’s brand?',a:'That’s the job.'},{q:'How is this different from AI tools?',a:'Senior people make every call and sign off every file. Tools multiply the output.'},{q:'Can we use the files for our client?',a:'Yes. All deliverables are prepared for commercial use in your client projects.'}]},
-  {id:'form', type:'form', label:'Next step', h:'Take every brief.', s:'Start with one client. Get 20% off your first month.', cta:'Get an agency quote',
-   ft:'Get an agency quote', f1:'Name', f2:'E-mail', f3:'Company & website', ph3:'Company name & website URL', f4:'Client accounts', chips:['1 client','2 clients','3–5','6–10','10+'], plan:false, f5:'Your role (optional)', f5input:true, ph5:'e.g. Founder, Producer, Creative Director', btn:'Send request', done:'Thanks! We’ve got your request and will be in touch soon.'}
+ agencies:{ nav:['How it works','Agency plan'], go:['approach','plan'], login:false, cta:'Get an agency quote', modules:[
+  {id:'hero', type:'hero', span:6, subBig:true, h1:'More output.\nSame quality bar.', sub:'Your white-label creative and production team for client projects. From concept to final asset.', k:'20% off your first month', cta:'Start a test month'},
+  {id:'reel', type:'reel', span:6, rlabel:'Our work', cap:'Watch the reel'},
+  {id:'s1', type:'statement', span:3, tone:'grey', viz:'check', h:'Art‑directed and approved by experts', s:'15 years of art direction behind every file.'},
+  {id:'s2', type:'statement', span:3, tone:'sky', h:'Any style. Any brand system.', s:'White-label and under NDA. Your clients see only you.', link:'See selected work →'},
+  {id:'engine', type:'engine', label:'Live demo', h:'Concepts for your clients.', h2:'Across formats, languages and markets.',
+   order:['format','lang','layout','scene','hook'], init:{layout:2, hook:0, lang:3, scene:1, format:2}, kinit:{style:'object', format:2}, combo:'Each one is checked by our experts before it reaches you.'},
+  {id:'solve', type:'features', items:[
+    {t:'Handle the overflow',s:'Take on extra briefs and new clients without stretching your team.',tone:'sky'},
+    {t:'Plugs into your pipeline',s:'Your briefs, tools, naming and approval steps. Nothing new to learn.',tone:'grey'},
+    {t:'Your quality bar, kept',s:'Senior art direction and an expert check on every file.',tone:'navy'}]},
+  {id:'approach', type:'approach', label:'Your extended creative department', h:'Senior taste, under your name.', s:'Start in a week. No hiring, no onboarding.', roles:ROLES,
+   concept:{k:'A concept', v:'is one idea and its visual storytelling, in\u00A0every version your media plan needs.'},
+   label2:'How a project runs', h2:'Brief on Monday, files by Friday', days:[
+    {d:'Day 1', a:1, b:1, t:'You bring the brief', s:'In your usual format. Or just the goal, and we propose the direction.'},
+    {d:'Days 2–3', a:2, b:3, t:'We craft the concepts', s:'Inside your client’s brand system, ready for your internal review.'},
+    {d:'Day 4', a:4, b:4, t:'We build every version', s:'Every format, language, hook and CTA your media plan needs.'},
+    {d:'Days 4–5', a:4, b:5, t:'Experts check every file', s:'Named, sized and checked against your specs.'},
+    {d:'Day 5', a:5, b:5, t:'You deliver under your name', s:'Files land where your team works. We stay invisible.'}]},
+  {id:'plan', type:'agencyplan', flip:true, label:'Agency partner plan', h:'One partner rate. A margin you can count on.', s:'', cta:'Get an agency quote',
+   listLabel:'What’s included', listH:'Pay only for concepts. Get unlimited files.', price:'From $3,289', priceL:'for one client and 4 concepts a month',
+   items:[{a:'Every version included',b:'Every format, size, language, hook and CTA your media plan needs.'},{a:'White-label, always',b:'No Toggle branding. Every file goes out under your name.'},{a:'One fee per client',b:'New client, new fee. Your margin stays predictable.'},{a:'A dedicated art director',b:'Learns each client’s brand system and is your single contact.'},{a:'Quality we stand behind',b:'Every file is checked before it reaches you.'},{a:'NDA from day one',b:'Your clients stay your clients.'}],
+   addon:'', foot:''},
+  {id:'faq', type:'faq', label:'Questions', items:[
+    {q:'Will my client know about you?',a:'No. We work behind the scenes, under NDA, and only talk to your team.'},
+    {q:'Can you match each client’s brand?',a:'That’s the job. We work inside existing brand systems or build new ones.'},
+    {q:'How is this different from AI tools?',a:'Senior people make every creative call and check every file. Tools only multiply the output.'},
+    {q:'Can we use the files for our clients?',a:'Yes. Every file is prepared for commercial use in your client projects.'}]},
+  {id:'form', type:'form', label:'Next step', h:'Take every brief.', s:'Start with one client and see how we fit into your pipeline.', cta:'',
+   ft:'Get 20% off your first month', short:true, f1:'Name', f2:'Email', f3:'Agency & website', ph3:'Agency name and website URL', f5:'Comment (optional)', ph5:'Clients, volumes, the tools your team uses', btn:'Send request', done:'Thanks! We’ve got your request and will be in touch soon.'}
  ]},
- brands:{ nav:['How we work','Pricing'], go:['approach','pricing'], login:false, cta:'Start a test month', modules:[
-  {id:'hero', type:'hero', span:6, h1:'One launch. Every channel, every market.', sub:'Senior creatives develop each concept. We produce every version, without extra hires.', k:'20% off your first month', cta:'Start a test month', link:'See how we work'},
-  {id:'make', type:'make', span:6, label:'What we make', h:'Content for digital growth', s:'Built for performance ads and beyond', items:['Performance ads','App store screenshots','Social content','Display banners','CRM & in-app','Localization']},
-  {id:'s1', type:'statement', span:3, tone:'navy', h:'Always on brand', s:'Your visual identity and tone stay consistent.'},
-  {id:'s2', type:'statement', span:3, tone:'sky', viz:'formats', h:'Market-ready content', s:'Adapted to local languages and audiences.'},
-  {id:'engine', type:'engine', label:'Demo', h:'Explore one concept across formats and markets',
-   order:['lang','format','scene','hook','layout'], init:{layout:0, hook:1, lang:0, scene:3, format:1}, kinit:{style:'knit', format:1}, combo:'possible variations from one concept. Every delivered asset reviewed by our team.'},
-  {id:'trust', type:'trust', reel:true, rlabel:'Our work', cap:'Watch the film: 15+ years of motion and art direction', n:'15+', nl:'years of motion and art direction', label:'Trusted by teams at', link:'See selected work →'},
-  {id:'solve', type:'features', items:[{t:'New ideas every month',s:'Keep your campaigns fresh with new creative.',tone:'navy'},{t:'Crafted, never generic',s:'A senior art director behind every concept.',tone:'sky'},{t:'One brand, locally adapted',s:'Consistent look and tone across languages.',tone:'grey'},{t:'Ready to launch',s:'Sized, formatted and named for every channel.',tone:'grey'}]},
-  {id:'approach', type:'approach', label:'Your creative department', h:'Senior taste. Modern speed.', s:'A full creative department for less than the cost of one senior hire.', roles:ROLES,
-   label2:'How we work', steps:[
-    {t:'We start with your goals',s:'What you sell, to whom and where.'},
-    {t:'We craft ideas that fit your brand',s:'Expert art direction. Never a template.'},
-    {t:'We adapt each concept at scale',s:'Across formats, sizes, languages and hooks.'},
-    {t:'We sign off every file',s:'Every delivered asset is reviewed and approved by our team.'}]},
-  {id:'pricing', type:'pricing', calc:true, h:'Pay for ideas. Get unlimited files.', s:'First month 20% off on any plan.', plans:PLANS, calc:true, calcInit:{f:6, l:3, h:3},
-   note:'Each concept can be adapted across formats, sizes, languages and hooks at no extra cost.',
-   addon:'Need branding before you scale? We can build or refine your brand identity first. Available on request.', addonAccent:true, foot:''},
-  {id:'faq', type:'faq', label:'Questions', items:[{q:'How is this different from AI tools?',a:'AI tools can generate variations. Our team develops the concepts, directs the creative and reviews every asset.'},{q:'What does a concept include?',a:'The idea, the art direction and every version of it.'},{q:'How fast do we start?',a:'First files in 5 days.'}]},
-  {id:'form', type:'form', label:'Next step', h:'Start with one month.', s:'Tell us your goals and markets. We’ll show you how we’d approach them.', cta:'Get 20% off your first month',
-   ft:'Request your test month', f1:'Name', f2:'Email', f3:'Company & website', ph3:'Company name and website URL', f4:'Markets', chips:['1–2','3–5','6+'], plan:true, f5:'Your goals (optional)', ph5:'Markets, channels, formats, timeline, etc.', btn:'Send request', done:'Thanks! We’ve got your request and will be in touch soon.'}
+ brands:{ nav:['How it works','Pricing'], go:['approach','pricing'], login:false, cta:'Start a test month', modules:[
+  {id:'hero', type:'hero', span:6, subBig:true, h1:'One launch.\nEvery channel, every market.', sub:'Senior creatives develop each concept. We produce every version, without extra hires.', k:'20% off your first month', cta:'Start a test month'},
+  {id:'make', type:'make', span:6, label:'What we make', h:'Content for digital growth, from first idea to finished assets', items:['Performance ads','App store screenshots','Social content','Display banners','CRM & in-app','Localization']},
+  {id:'s1', type:'statement', span:3, tone:'navy', viz:'check', h:'Always on brand', s:'Your look and tone stay consistent in every version.'},
+  {id:'s2', type:'statement', span:3, tone:'grey', viz:'formats', h:'Ready for every market', s:'Adapted to local languages and audiences.'},
+  {id:'engine', type:'engine', label:'Live demo', h:'See how concepts adapt to every channel and market',
+   order:['lang','format','scene','hook','layout'], init:{layout:0, hook:1, lang:0, scene:3, format:1}, kinit:{style:'knit', format:1}, combo:'Every file we deliver is checked by our experts.'},
+  {id:'trust', type:'trust', reel:true, rlabel:'Our work', cap:'Watch the film: 15 years of motion and art direction', n:'15', nl:'years of motion and art direction', label:'Trusted by teams at', link:'See selected work →'},
+  {id:'solve', type:'features', items:[
+    {t:'New ideas every month',s:'Fresh concepts keep your campaigns from going stale.',tone:'sky'},
+    {t:'Crafted, never generic',s:'A senior art director behind every concept.',tone:'grey'},
+    {t:'One brand, locally adapted',s:'The same look and tone in every language.',tone:'sky'},
+    {t:'Ready to launch',s:'Sized, formatted and named for every channel.',tone:'grey'}]},
+  {id:'approach', type:'approach', flip:true, label:'Your creative department', h:'Senior taste. Modern speed.', s:'A full creative department for less than the cost of one senior hire.', roles:ROLES,
+   concept:{k:'A concept', v:'is one idea and its visual storytelling, in\u00A0every format, size and language.'},
+   label2:'How it works', h2:'Your first campaign in 5 days', days:[
+    {d:'Day 1', a:1, b:1, t:'Share your goals', s:'What you sell, to whom, in which markets and channels.'},
+    {d:'Days 2–3', a:2, b:3, t:'We craft the concepts', s:'Ideas and art direction built around your brand. You approve them first.'},
+    {d:'Day 4', a:4, b:4, t:'We build all versions', s:'Every format, size, language, hook and CTA.'},
+    {d:'Days 4–5', a:4, b:5, t:'Experts check every file', s:'Art directors review each version for brand, copy and specs.'},
+    {d:'Day 5', a:5, b:5, t:'Launch in every market', s:'Files arrive named and sorted by channel and market.'}]},
+  {id:'pricing', type:'pricing', calc:true, h:'Pay only for concepts.\nGet unlimited files.', s:'', plans:PLANS, popular:1, calcInit:{f:4, l:10, h:5, c:3},
+   note:'Every format, size, language, hook and CTA of a concept is included in the price.',
+   addonL:'Add-on', addonH:'Add branding to any plan.', addon:'Need a brand before you scale? We build or refresh your identity, tone of voice and key templates first, so every version starts on brand. Ordered separately.', addonC:'Ask about branding'},
+  {id:'faq', type:'faq', label:'Questions', items:[
+    {q:'How is this different from AI tools?',a:'AI tools can generate variations. Our team develops the concepts, directs the creative and checks every file.'},
+    {q:'What does a concept include?',a:'The idea, the art direction and every version of it.'},
+    {q:'Do we approve concepts before you scale them?',a:'Yes. You approve each concept first, then we build all its versions.'},
+    {q:'How fast do we start?',a:'First files within 5 days of the first call.'}]},
+  {id:'form', type:'form', label:'Next step', h:'Start with one month.', s:'Tell us your goals and markets. We’ll show you how we’d approach them.', cta:'',
+   ft:'Get 20% off your first month', short:true, f1:'Name', f2:'Email', f3:'Company & website', ph3:'Company name and website URL', f5:'Comment (optional)', ph5:'Markets, channels, timeline', btn:'Send request', done:'Thanks! We’ve got your request and will be in touch soon.'}
  ]}
 };
 const FOOT = 'Toggle Concepts — art-directed ad creative production by Toggle Studio.';
@@ -124,7 +145,7 @@ const TONES = ['navy','sky','grey','light','white'];
 const WIDTHS = [3,4,5,6,7,8,12];
 const SINGLE = ['hero','visual','statement','list','faq'];
 const CONCEPTS = [2,4,6];
-const OPT = {f:[1,2,3,4,5,6], l:[1,2,3,5,10], h:[1,2,3,4]};
+const OPT = {f:[1,2,3,4], l:[1,5,10,20], h:[1,3,5,10], c:[1,2,3,4]};
 
 /* ---------- media: defaults live here; editors replace them in edit mode (stored in db texts as media.*) ---------- */
 const KITE_BASE = '/assets/kite-engine/';
@@ -149,15 +170,17 @@ function glossImg(){ const u = mediaSrc('gloss'); return `<img src="${u}" alt=""
 const EXPAND = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function reelHeadTile(K, m){
   const v = mediaSrc('reel');
-  const inner = v ? `<video class="reelvid" src="${v}" poster="${mediaSrc('reelPoster')}" muted ${REDUCED?'':'autoplay'} loop playsinline preload="${REDUCED?'none':'auto'}" aria-hidden="true"></video>` : `<span class="reelplay" aria-hidden="true">${glossImg()}${PLAY}</span>`;
-  return `<div class="tile t-grey reelhead"><div class="rh-txt">${E('p',K('h'),m.h,'h-l')}${E('p',K('cap'),m.cap,'muted lead')}${m.link?E('a',K('wl'),m.link,'work-link','href="https://www.toggle.studio/reel" target="_blank" rel="noopener"'):''}</div><div class="reelbox" data-reel="1">${inner}<button type="button" class="reelexp" data-lightbox="1" aria-label="Watch the reel with sound">${EXPAND}<span>Watch with sound</span></button></div></div>`;
+  const inner = v ? `<video class="reelvid" src="${v}" poster="${mediaSrc('reelPoster')}" muted loop playsinline preload="none" aria-hidden="true"></video>` : `<span class="reelplay" aria-hidden="true">${glossImg()}${PLAY}</span>`;
+  return `<div class="tile t-grey reelhead"><div class="rh-txt rh-row">${E('p',K('h'),m.h,'h-m rh-h')}${m.cap?E('p',K('cap'),m.cap,'muted lead'):''}${m.link?E('a',K('wl'),m.link,'work-link','href="https://www.toggle.studio/reel" target="_blank" rel="noopener"'):''}</div><div class="reelbox" data-reel="1">${inner}<button type="button" class="reelexp" data-lightbox="1" aria-label="Watch the reel with sound">${EXPAND}<span>Watch with sound</span></button></div></div>`;
 }
 function reelTile(K, m, cls){
   const v = mediaSrc('reel');
-  const vid = v ? `<video class="reelvid" src="${v}" poster="${mediaSrc('reelPoster')}" muted ${REDUCED?'':'autoplay'} loop playsinline preload="${REDUCED?'none':'auto'}" aria-hidden="true"></video>` : `<span class="reelplay" aria-hidden="true">${glossImg()}${PLAY}</span>`;
-  return `<div class="tile reeltile ${cls}${v?' has-vid':''}" data-reel="1">${vid}<span class="reelcap">${E('span',K(m.rlabel!==undefined?'rlabel':'label'),m.rlabel!==undefined?m.rlabel:m.label,'label')}${E('span',K('cap'),m.cap,'h-m')}</span><button type="button" class="reelexp" data-lightbox="1" aria-label="Watch the reel with sound">${EXPAND}<span>Watch with sound</span></button></div>`;
+  const vid = v ? `<video class="reelvid" src="${v}" poster="${mediaSrc('reelPoster')}" muted loop playsinline preload="none" aria-hidden="true"></video>` : `<span class="reelplay" aria-hidden="true">${glossImg()}${PLAY}</span>`;
+  return `<div class="tile reeltile ${cls}${v?' has-vid':''}${m.capOn?' cap-on':''}" data-reel="1">${vid}<span class="reelcap">${E('span',K(m.rlabel!==undefined?'rlabel':'label'),m.rlabel!==undefined?m.rlabel:m.label,'label')}${E('span',K('cap'),m.cap,'h-m')}</span><button type="button" class="reelexp" data-lightbox="1" aria-label="Watch the reel with sound">${EXPAND}<span>Watch with sound</span></button></div>`;
 }
 const VF = [['9:16',.5625],['4:5',.8],['1:1',1],['16:9',1.7778]];
+/* four files, ticked one by one: the people check */
+function vizCheck(){ return `<div class="vchk" aria-hidden="true">${[0,1,2,3].map(i=>`<i style="--i:${i}"><b></b></i>`).join('')}</div>`; }
 function vizFormats(){
   return `<div class="vf" aria-hidden="true">${VF.map(([r,a],i)=>`<div class="vf-c${a>1.2?' wide':''}" style="--ar:${a}"><div class="vf-card" style="--i:${i}"><i class="im"></i>${a>1.2?'<span class="txt"><i class="ln"></i><i class="bt"></i></span>':'<i class="ln"></i><i class="bt"></i>'}<b class="vf-lang">EN</b></div><span class="vf-r">${r}</span></div>`).join('')}</div>`;
 }
@@ -203,7 +226,7 @@ function E(tag, k, def, cls='', attrs=''){ DEF[k] = def; return `<${tag} class="
 const planSel = () => (PLANSEL[page] ?? 1);
 const planName = i => val(`${page}.pricing.pn${i}`) ?? PLANS[i].n;
 const planPrice = i => val(`${page}.pricing.pp${i}`) ?? PLANS[i].p;
-const calcState = () => (CALC[page] ||= {...((PAGES[page].modules.find(x=>x.type==='pricing')||{}).calcInit || {f:4, l:3, h:3})});
+const calcState = () => (CALC[page] ||= {...((PAGES[page].modules.find(x=>x.type==='pricing')||{}).calcInit || {f:4, l:10, h:5, c:3})});
 
 const ARROW_DIAG = `<svg class="diag" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="100" x2="100" y2="0" stroke="currentColor" vector-effect="non-scaling-stroke" style="stroke-width:1.2px"/><polyline points="88,0 100,0 100,12" fill="none" stroke="currentColor" vector-effect="non-scaling-stroke" style="stroke-width:1.2px"/></svg>`;
 const ARROW_H = `<svg class="harrow" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="7" x2="298" y2="7" stroke="currentColor" vector-effect="non-scaling-stroke" style="stroke-width:1.2px"/><polyline points="288,1 298,7 288,13" fill="none" stroke="currentColor" vector-effect="non-scaling-stroke" style="stroke-width:1.2px"/></svg>`;
@@ -211,7 +234,7 @@ const HINT = '<p class="swipe-hint">Swipe →</p>';
 
 /* ---------- module renderers: each returns {cls, html} ---------- */
 const R = {
- hero:(m,K,o)=>({cls:`sp-${o.span}${m.flat?'':' rows-2'}`, html:`<div class="tile t-grad hero${m.flat?' flat':''}">${E('h1',K('h1'),m.h1,'h-hero')}<div class="bottom">${E('p',K('sub'),m.sub,'lead')}<div class="cta-row"><button class="cta-card" type="button" data-go="form"><span class="txt">${E('span',K('k'),m.k,'k')}${E('span',K('cta'),m.cta,'t')}</span><span class="arr" aria-hidden="true">→</span></button>${E('button',K('link'),m.link,'ulink','type="button" data-go="'+(page==='agencies'?'engine':'approach')+'"')}</div></div></div>`}),
+ hero:(m,K,o)=>({cls:`sp-${o.span}${m.flat?'':' rows-2'}`, html:`<div class="tile t-grad hero${m.flat?' flat':''}">${E('h1',K('h1'),m.h1,'h-hero')}<div class="bottom">${E('p',K('sub'),m.sub,m.subBig?'hero-sub':'lead')}<div class="cta-row"><button class="cta-card" type="button" data-go="form"><span class="txt">${E('span',K('k'),m.k,'k')}${E('span',K('cta'),m.cta,'t')}</span><span class="arr" aria-hidden="true">→</span></button></div></div></div>`}),
  visual:(m,K,o)=>({cls:`sp-${o.span}`, html:`<div class="tile t-${o.tone} visual" aria-hidden="true"><div class="ring"></div></div>`}),
  reel:(m,K,o)=>({cls:`sp-${o.span}`, html:m.h ? reelHeadTile(K,m) : reelTile(K,m,'')}),
  heroengine:(m,K,o)=>{
@@ -223,11 +246,14 @@ const R = {
    }).join('');
    return {cls:`sp-${o.span}`, html:`<div class="tile t-light mini eng"><div class="mini-ctrl">${groups}</div><div class="stage" id="stage" aria-live="polite">${adHTML(st)}</div><div class="readout mini-read"><span class="code" id="code">${codeLine(m,st)}</span><span class="combo"><b>${combos}</b> ${E('span',K('combo'),m.combo)}</span></div></div>`};
  },
- make:(m,K,o)=>({cls:`sp-${o.span}`, html:`<div class="tile t-light make" style="justify-content:space-between;gap:18px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:14px">${E('p',K('h'),m.h,'make-h')}<div class="chips">${m.items.map((t,i)=>E('span',K('i'+i),t,'chip'+(i===0?' lead-chip':''))).join('')}</div>${E('p',K('s'),m.s,'muted')}</div></div>`}),
+ path:(m,K,o)=>({cls:`sp-${o.span}`, html:`<div class="tile t-light path"><div class="path-head">${E('span',K('label'),m.label,'label')}${m.h?E('p',K('h'),m.h,'h-m path-h'):''}</div><ol class="track" style="--n:${m.items.length}">${m.items.map((t,i)=>`<li><span class="node">${i+1}</span>${E('p',K('i'+i),t,'pt')}</li>`).join('')}</ol></div>`}),
+ conceptdays:(m,K)=>({cls:'sp-12', html:`<div class="sub${m.flip?' flip':''}"><div class="tile t-navy sp-5 concept">${m.label?E('span',K('label'),m.label,'label'):''}<p class="cdef">${E('span',K('ck'),m.ck,'cdef-k')} ${E('span',K('cv'),m.cv,'cdef-v')}</p><div class="uses-for">${E('span',K('ul'),m.ul,'label')}<div class="tags">${m.items.map((t,i)=>E('span',K('i'+i),t,'tag')).join('')}</div></div>${E('p',K('s'),m.s,'muted uses-s')}</div>${daysTile(m,K)}</div>`}),
+ usesdays:(m,K)=>({cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-5 uses" style="gap:24px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:22px">${E('p',K('h'),m.h,'h-l')}<div class="chips">${m.items.map((t,i)=>E('span',K('i'+i),t,'chip chip-dark')).join('')}</div></div>${E('p',K('s'),m.s,'muted uses-s')}</div>${daysTile(m,K)}</div>`}),
+ make:(m,K,o)=>({cls:`sp-${o.span}`, html:`<div class="tile t-light make" style="justify-content:space-between;gap:18px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:14px">${E('p',K('h'),m.h,'make-h')}<div class="tags">${m.items.map((t,i)=>E('span',K('i'+i),t,'tag')).join('')}</div>${m.s?E('p',K('s'),m.s,'muted'):''}</div></div>`}),
  features:(m,K)=>({cls:'sp-12', html:`<div class="sub feat-grid">${m.items.map((it,i)=>`<div class="tile t-${it.tone} sp-${12/m.items.length|0} feat">${E('p',K('t'+i),it.t,'h-m')}${E('p',K('s'+i),it.s,'muted push')}</div>`).join('')}</div>`}),
- approach:(m,K)=>({cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-5" style="justify-content:space-between;gap:24px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:12px">${E('p',K('h'),m.h,'h-l')}${E('p',K('s'),m.s,'muted lead')}</div><div class="chips approach-roles">${m.roles.map((t,i)=>E('span',K('r'+i),t,'chip chip-dark')).join('')}</div>${m.proof?`<div class="proof">${E('span',K('pn'),m.proof.n,'proof-n')}${E('p',K('pt'),m.proof.t,'proof-t')}</div>`:''}</div><div class="tile t-grey sp-7" style="gap:8px">${E('span',K('label2'),m.label2,'label')}<div class="srows">${m.steps.map((it,i)=>`<div class="srow"><span class="sn">0${i+1}</span><div>${E('p',K('t'+i),it.t,'st')}${E('p',K('s'+i),it.s,'muted')}</div></div>`).join('')}</div></div></div>`}),
+ approach:(m,K)=>({cls:'sp-12', html:`<div class="sub${m.flip?' flip':''}"><div class="tile t-navy sp-5" style="justify-content:space-between;gap:24px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:12px">${E('p',K('h'),m.h,'h-l')}${E('p',K('s'),m.s,'muted lead')}</div><div class="tags approach-roles">${m.roles.map((t,i)=>E('span',K('r'+i),t,'tag')).join('')}</div>${m.concept?`<p class="cdef cdef-row">${E('span',K('ck'),m.concept.k,'cdef-k')} ${E('span',K('cv'),m.concept.v,'cdef-v')}</p>`:''}${m.proof?`<div class="proof">${E('span',K('pn'),m.proof.n,'proof-n')}${E('p',K('pt'),m.proof.t,'proof-t')}</div>`:''}</div>${m.days?daysTile(m,K):`<div class="tile t-grey sp-7" style="gap:8px">${E('span',K('label2'),m.label2,'label')}<div class="srows">${m.steps.map((it,i)=>`<div class="srow"><span class="sn">0${i+1}</span><div>${E('p',K('t'+i),it.t,'st')}${E('p',K('s'+i),it.s,'muted')}</div></div>`).join('')}</div></div>`}</div>`}),
  outputs:(m,K)=>({cls:'sp-12', html:`<div class="tile t-white strip" style="align-items:center">${E('span',K('label'),m.label,'label')}<div class="chips">${m.items.map((t,i)=>E('span',K('i'+i),t,'chip'+(i===0?' lead-chip':''))).join('')}</div></div>`}),
- statement:(m,K,o)=>{ const v = m.viz && o.fx; return {cls:`sp-${o.span}`, html:`<div class="tile t-${o.tone} stmt${v?' has-viz':''}">${E('p',K('h'),m.h,'stmt-h')}${v?vizFormats():''}${E('p',K('s'),m.s,'stmt-s')}</div>`}; },
+ statement:(m,K,o)=>{ const v = m.viz && o.fx; return {cls:`sp-${o.span}`, html:`<div class="tile t-${o.tone} stmt${v?' has-viz':''}${m.n?' has-n':''}">${m.n?`<span class="pn">${esc(m.n)}</span>${v?`<div class="stmt-viz">${m.viz==='check'?vizCheck():vizFormats()}</div>`:''}${E('p',K('h'),m.h,'stmt-h')}`:`${E('p',K('h'),m.h,'stmt-h')}${v?`<div class="stmt-viz2">${m.viz==='check'?vizCheck():vizFormats()}</div>`:''}${m.s?E('p',K('s'),m.s,'stmt-s'):''}${m.link?E('a',K('wl'),m.link,'work-link stmt-link','href="https://www.toggle.studio/reel" target="_blank" rel="noopener"'):''}`}</div>`}; },
  engine:(m,K)=>{
    /* KITE engine v2: <kite-engine> web component (kite-engine/kite-engine.js), headings stay per landing */
    const h = m.h ? (DEF[K('h')]=m.h, val(K('h'))) : '', h2 = m.h2 ? (DEF[K('h2')]=m.h2, val(K('h2'))) : '';
@@ -240,8 +266,8 @@ const R = {
  compare:(m,K)=>({cls:'sp-12', html:`<div style="flex:1;min-width:0"><div class="row3 scroll">${m.items.map((it,i)=>`<div class="tile ${i===2?'t-navy':'t-grey'} cmp">${i===0?E('span',K('label'),m.label,'label'):'<span class="label" aria-hidden="true">&nbsp;</span>'}${E('p',K('t'+i),it.t,'h-l push')}${E('p',K('s'+i),it.s,i===2?'muted lead':'muted')}${i===2?'<span class="mark-ok">Quality · Volume · Accountability</span>':''}</div>`).join('')}</div>${HINT}</div>`}),
  dept:(m,K)=>({cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-6" style="justify-content:space-between;gap:24px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:12px">${E('p',K('h'),m.h,'h-l')}${E('p',K('s'),m.s,'muted lead')}</div><div class="chips">${m.roles.map((t,i)=>E('span',K('r'+i),t,'chip chip-dark')).join('')}</div></div><div class="tile t-grey sp-6" style="justify-content:space-between;gap:24px">${E('p',K('h2'),m.h2,'h-m')}<div class="chips">${m.items.map((t,i)=>E('span',K('i'+i),t,'chip'+(i===0?' lead-chip':''))).join('')}</div>${E('p',K('s2'),m.s2,'muted')}</div></div>`}),
  proof:(m,K)=>({cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-4" style="justify-content:space-between;min-height:260px">${E('span',K('n'),m.n,'num-xl')}${E('p',K('nl'),m.nl,'muted')}</div><div class="tile t-sky sp-8 split" style="--a:1fr;--b:1.3fr;align-items:stretch"><div style="display:flex;flex-direction:column;gap:16px;justify-content:space-between">${E('p',K('h'),m.h,'h-l')}${E('a',K('link'),m.link,'ulink','href="https://www.toggle.studio" target="_blank" rel="noopener"')}</div>${E('div',K('reel'),m.reel,'reel')}</div></div>`}),
- trust:(m,K)=>{ const logos = `<ul class="logos">${LOGOS.map(l=>`<li><img src="${l.src}" alt="${esc(l.n)}" style="height:${l.h}px" loading="lazy"></li>`).join('')}</ul>`;
-   if(m.reel) return {cls:'sp-12', html:`<div class="sub">${reelTile(K,m,'sp-5')}<div class="tile t-grey sp-7 trust-card"><div class="trust-top">${E('span',K('label'),m.label,'label')}${m.link?E('a',K('wl'),m.link,'work-link','href="https://www.toggle.studio/reel" target="_blank" rel="noopener"'):''}</div>${logos}</div></div>`};
+ trust:(m,K)=>{ const logos = `<ul class="logos">${LOGOS.map(l=>`<li><img src="${l.src}" alt="${esc(l.n)}" style="height:${l.h}px" loading="lazy"></li>`).join('')}${LOGOS.map(l=>`<li class="dup" aria-hidden="true"><img src="${l.src}" alt="" style="height:${l.h}px" loading="lazy"></li>`).join('')}</ul>`;
+   if(m.reel) return {cls:'sp-12', html:`<div class="sub">${reelTile(K,m,'sp-5')}<div class="tile t-grey sp-7 trust-card"><div class="trust-top">${m.n?`<div class="yrs">${E('span',K('n'),m.n,'yrs-n')}<div>${E('p',K('nl'),m.nl,'yrs-t')}${E('span',K('label'),m.label,'label')}</div></div>`:E('span',K('label'),m.label,'label')}${m.link?E('a',K('wl'),m.link,'work-link','href="https://www.toggle.studio/reel" target="_blank" rel="noopener"'):''}</div>${logos}</div></div>`};
    return {cls:'sp-12', html:`<div class="sub"><div class="tile t-navy ${m.link?'sp-5':'sp-4'} trust-stat" style="justify-content:space-between;min-height:220px"><div class="stat-top">${E('span',K('n'),m.n,'num-xl')}${m.link?E('a',K('wl'),m.link,'work-link','href="https://www.toggle.studio/reel" target="_blank" rel="noopener"'):''}</div>${E('p',K('nl'),m.nl,'muted')}</div><div class="tile t-grey ${m.link?'sp-7':'sp-8'}" style="gap:16px"><div class="trust-top">${E('span',K('label'),m.label,'label')}${m.link?E('a',K('wl'),m.link,'work-link wl-m','href="https://www.toggle.studio/reel" target="_blank" rel="noopener"'):''}</div>${logos}</div></div>`}; },
  pricing:(m,K)=>{
    const sel = planSel();
@@ -250,25 +276,35 @@ const R = {
    if(m.calc){
      const c = calcState(); const CK = f=>`${page}.calc.${f}`;
      const grp = (id,key)=>`<div class="group">${E('span',CK(id),CALCL[id],'label')}<div class="pills">${OPT[key].map(o=>`<button type="button" class="pill" data-calc="${key}" data-v="${o}" aria-pressed="${o===c[key]}">${o}</button>`).join('')}</div></div>`;
-     calc = `<div class="tile t-grey sp-8 calc-tile" style="gap:20px">${E('p',CK('label'),CALCL.label,'h-m')}${grp('l2','f')}${grp('l3','l')}${grp('l4','h')}</div><div class="tile t-navy sp-4" style="justify-content:flex-end" id="calcRes">${calcOut()}</div>`;
+     calc = `<div class="tile t-grey sp-6 calc-tile" style="gap:20px">${E('p',CK('label'),CALCL.label,'h-m')}<div class="calc-grid">${grp('l2','f')}${grp('l5','c')}${grp('l3','l')}${grp('l4','h')}</div></div><div class="tile t-navy sp-3 calc-res" style="justify-content:flex-end" id="calcRes">${calcOut()}</div><div class="tile t-grey sp-3 calc-res" style="justify-content:flex-end" id="calcPer">${calcPer()}</div>`;
    }
-   return {cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-3" style="justify-content:space-between;min-height:240px">${E('p',K('h'),m.h,'h-m')}${E('p',K('s'),m.s,'muted')}</div>${m.single?`<div class="tile t-sky sp-9 plan-single">${E('span',K('sk'),m.single.k,'label')}<div>${E('span',K('sp'),m.single.p,'price')}${m.single.per?`<span class="per"> ${esc(m.single.per)}</span>`:''}</div>${E('p',K('sl'),m.single.l,'lead')}</div>`:`<div class="sp-9 plans3">${plans}</div>`}${m.note?`<div class="tile t-sky sp-12 price-note">${E('p',K('note'),m.note,'h-m')}</div>`:''}${calc}${m.addon?`<div class="tile ${m.addonAccent?'t-navy addon-accent':'t-white'} sp-12 strip"><span class="plus">+</span>${E('span',K('addon'),m.addon)}${m.foot?E('span',K('foot'),m.foot,'muted'):''}</div>`:''}</div>`};
+   return {cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-3 price-head" style="justify-content:space-between;min-height:240px">${E('p',K('h'),m.h,m.s?'h-m':'h-m price-h')}${m.s?E('p',K('s'),m.s,'muted'):''}${m.note?E('p',K('note'),m.note,'price-incl'):''}</div>${m.single?`<div class="tile t-sky sp-9 plan-single">${E('span',K('sk'),m.single.k,'label')}<div>${E('span',K('sp'),m.single.p,'price')}${m.single.per?`<span class="per"> ${esc(m.single.per)}</span>`:''}</div>${E('p',K('sl'),m.single.l,'lead')}</div>`:`<div class="sp-9 plans3">${plans}</div>`}${calc}${m.addonH?`<div class="tile t-grad sp-12 addon2"><div class="ad2-txt">${E('span',K('addonL'),m.addonL,'ad2-l')}${E('p',K('addonH'),m.addonH,'h-l')}${E('p',K('addon'),m.addon,'muted lead')}</div><div class="ad2-act">${m.addonP?E('span',K('addonP'),m.addonP,'ad2-p'):''}${E('button',K('addonC'),m.addonC,'pill-cta ad2-btn','type="button" data-go="form"')}</div></div>`:m.addon?`<div class="tile ${m.addonAccent?'t-navy addon-accent':'t-white'} sp-12 strip"><span class="plus">+</span>${E('span',K('addon'),m.addon)}${m.foot?E('span',K('foot'),m.foot,'muted'):''}</div>`:''}</div>`};
  },
- agencyplan:(m,K)=>({cls:'sp-12', html:`<div class="sub"><div class="tile t-navy sp-5" style="justify-content:space-between;gap:28px;min-height:420px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:16px">${E('p',K('h'),m.h,'h-xl')}${m.s?E('p',K('s'),m.s,'muted lead'):''}</div><div>${E('button',K('cta'),m.cta,'pill-cta','type="button" data-go="form" style="background:#fff;color:var(--navy);text-transform:none;font-size:17px;font-weight:600"')}</div></div><div class="tile t-grey sp-7" style="gap:12px">${E('span',K('listLabel'),m.listLabel,'label')}<div class="rows">${m.items.map((it,i)=>`<div class="row">${E('p',K('a'+i),it.a,'a')}${E('p',K('b'+i),it.b,'b')}</div>`).join('')}</div></div><div class="tile t-white sp-12 strip"><span class="plus">+</span>${E('span',K('addon'),m.addon)}${m.foot?E('span',K('foot'),m.foot,'muted'):''}</div></div>`}),
+ agencyplan:(m,K)=>({cls:'sp-12', html:`<div class="sub${m.flip?' flip':''}"><div class="tile t-navy sp-5" style="justify-content:space-between;gap:28px;min-height:420px">${E('span',K('label'),m.label,'label')}<div style="display:flex;flex-direction:column;gap:16px">${E('p',K('h'),m.h,'h-xl')}${m.s?E('p',K('s'),m.s,'muted lead'):''}</div>${m.price?`<div class="ap-price">${E('span',K('price'),m.price,'price')}${E('span',K('priceL'),m.priceL,'ap-pl')}</div>`:''}<div>${E('button',K('cta'),m.cta,'pill-cta','type="button" data-go="form" style="background:#fff;color:var(--navy);text-transform:none;font-size:17px;font-weight:600"')}</div></div><div class="tile t-grey sp-7" style="gap:12px">${E('span',K('listLabel'),m.listLabel,'label')}${m.listH?E('p',K('listH'),m.listH,'h-m ap-lh'):''}<div class="rows">${m.items.map((it,i)=>`<div class="row">${E('p',K('a'+i),it.a,'a')}${E('p',K('b'+i),it.b,'b')}</div>`).join('')}</div></div>${m.addon?`<div class="tile t-white sp-12 strip"><span class="plus">+</span>${E('span',K('addon'),m.addon)}${m.foot?E('span',K('foot'),m.foot,'muted'):''}</div>`:''}</div>`}),
  faq:(m,K,o)=>({cls:`sp-${o.span||12}`, html:`<div class="tile t-${o.tone||'grey'}" style="gap:16px">${E('span',K('label'),m.label,'label')}<div class="faq">${m.items.map((it,i)=>`<div class="qa">${E('p',K('q'+i),it.q,'q','tabindex="0"')}${E('p',K('a'+i),it.a,'a')}</div>`).join('')}</div>${m.extras?`<div class="faq-extras">${m.extras.map((x,i)=>`<div>${E('span',K('xl'+i),x.l,'label')}${E('p',K('xt'+i),x.t)}</div>`).join('')}</div>`:''}</div>`}),
  form:(m,K,o)=>{
    if(!FORM[page]) FORM[page] = {chip:null};
-   const chips = m.chips.map((c,i)=>`<button type="button" class="pill" data-chip="${i}" aria-pressed="${FORM[page].chip===i}">${esc(c)}</button>`).join('');
+   const chips = (m.chips||[]).map((c,i)=>`<button type="button" class="pill" data-chip="${i}" aria-pressed="${FORM[page].chip===i}">${esc(c)}</button>`).join('');
    const lab = (id,txt,forId)=>{ DEF[K(id)]=txt; return `<label class="fl" for="${forId}" data-k="${K(id)}">${esc(val(K(id)))}</label>`; };
    const planField = m.plan ? `<div class="field full">${E('span',K('f6'),'Plan','fl')}<div class="pills">${PLANS.map((p,i)=>`<button type="button" class="pill" data-planchip="${i}" aria-pressed="${i===planSel()}">${esc(planName(i))} · ${CONCEPTS[i]} concepts</button>`).join('')}</div></div>` : '';
-   return {cls:'sp-12', html:`<div class="sub"><div class="tile t-sky sp-6 form-intro" style="justify-content:space-between;min-height:540px">${E('span',K('label'),m.label,'label')}${o.fx?`<div class="fgloss" aria-hidden="true"><span class="gl">${glossImg()}</span>${mswap('gloss')}</div>`:''}<div style="display:flex;flex-direction:column;gap:20px">${E('p',K('h'),m.h,'h-xl')}${E('p',K('s'),m.s,'lead')}<div>${E('button',K('cta'),m.cta,'pill-cta','type="button" data-focus="1" style="text-transform:none;font-size:18px;font-weight:600"')}</div></div></div><div class="tile t-grey sp-6"><form id="leadForm" novalidate style="display:flex;flex-direction:column;gap:18px"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">${E('p',K('ft'),m.ft,'h-l')}<div class="ff"><div class="field">${lab('f1',m.f1,'f1-'+page)}<input id="f1-${page}" type="text" autocomplete="name" placeholder="Your name"></div><div class="field">${lab('f2',m.f2,'f2-'+page)}<input id="f2-${page}" type="email" autocomplete="email" placeholder="you@company.com"></div><div class="field full">${lab('f3',m.f3,'f3-'+page)}<input id="f3-${page}" type="text" autocomplete="organization" placeholder="${esc(m.ph3||'Company and website')}"></div>${planField}<div class="field full">${E('span',K('f4'),m.f4,'fl')}<div class="pills">${chips}</div></div><div class="field full">${lab('f5',m.f5,'f5-'+page)}${m.f5input?`<input id="f5-${page}" type="text" autocomplete="organization-title" placeholder="${esc(m.ph5||'')}">`:`<textarea id="f5-${page}" placeholder="${esc(m.ph5||'Markets, formats, timeline')}"></textarea>`}</div></div><button class="submit" type="submit">${E('span',K('btn'),m.btn)}<span aria-hidden="true">→</span></button><p class="err" id="formErr" hidden>Please add a valid work e-mail.</p><p class="done" id="formDone" hidden>${esc(m.done)}</p></form></div></div>`};
+   return {cls:'sp-12', html:`<div class="sub"><div class="tile t-sky sp-6 form-intro" style="justify-content:space-between;min-height:540px">${E('span',K('label'),m.label,'label')}${o.fx?`<div class="fgloss" aria-hidden="true"><span class="gl">${glossImg()}</span>${mswap('gloss')}</div>`:''}<div style="display:flex;flex-direction:column;gap:20px">${E('p',K('h'),m.h,'h-xl')}${E('p',K('s'),m.s,'lead')}${m.cta?`<div>${E('button',K('cta'),m.cta,'pill-cta','type="button" data-focus="1" style="text-transform:none;font-size:18px;font-weight:600"')}</div>`:''}</div></div><div class="tile t-grey sp-6${m.short?' form-short':''}"><form id="leadForm" novalidate style="display:flex;flex-direction:column;gap:18px"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">${m.short?E('p',K('ft'),m.ft,'h-xl form-title').replace(/(\d+%\s*off)/i,'<em class="off">$1</em>'):E('p',K('ft'),m.ft,'h-l')}<div class="ff"><div class="field">${lab('f1',m.f1,'f1-'+page)}<input id="f1-${page}" type="text" autocomplete="name" placeholder="Your name"></div><div class="field">${lab('f2',m.f2,'f2-'+page)}<input id="f2-${page}" type="email" autocomplete="email" placeholder="you@company.com"></div><div class="field full">${lab('f3',m.f3,'f3-'+page)}<input id="f3-${page}" type="text" autocomplete="organization" placeholder="${esc(m.ph3||'Company and website')}"></div>${planField}${m.chips?`<div class="field full">${E('span',K('f4'),m.f4,'fl')}<div class="pills">${chips}</div></div>`:''}<div class="field full">${lab('f5',m.f5,'f5-'+page)}${m.f5input?`<input id="f5-${page}" type="text" autocomplete="organization-title" placeholder="${esc(m.ph5||'')}">`:`<textarea id="f5-${page}" placeholder="${esc(m.ph5||'Markets, formats, timeline')}"></textarea>`}</div></div><button class="submit" type="submit">${E('span',K('btn'),m.btn)}<span aria-hidden="true">→</span></button><p class="err" id="formErr" hidden>Please add a valid work email.</p><p class="done" id="formDone" hidden>${esc(m.done)}</p></form></div></div>`};
  }
 };
 function codeLine(m,st){ return m.switches.map(sw=>{ const S=SWITCH[sw]; return `${S.lab.toLowerCase()}=${S.opts()[st[S.key]]}`; }).join(' · '); }
+const priceNum = i => Number(String(planPrice(i)).replace(/[^0-9.]/g,'')) || 0;
+function calcPer(){
+  const c = calcState(), i = planSel(), files = CONCEPTS[i]*c.f*c.l*c.h*(c.c||1), p = priceNum(i);
+  const per = files ? p/files : 0;
+  return `<div class="big per-big">$${per.toFixed(2)}</div><p class="lead">cost per file</p>`;
+}
+/* "how we work" by days: day label, step, explanation and a five-day bar */
+function daysTile(m,K){
+  return `<div class="tile t-grey sp-7 days">${E('span',K('label2'),m.label2,'label')}${E('p',K('h2'),m.h2,'h-m')}<div class="drows"><div class="drow dhead" aria-hidden="true"><span></span><span></span><span class="dbar">${[1,2,3,4,5].map(n=>`<i>${n}</i>`).join('')}</span></div>${m.days.map((x,i)=>`<div class="drow">${E('span',K('d'+i),x.d,'dd')}<div>${E('p',K('t'+i),x.t,'st')}${E('p',K('s'+i),x.s,'muted')}</div><span class="dbar" aria-hidden="true">${[1,2,3,4,5].map(n=>`<i class="${n>=x.a&&n<=x.b?'on':''}"></i>`).join('')}</span></div>`).join('')}</div></div>`;
+}
 function calcOut(){
   const c = calcState(); const i = planSel(); const CK = f=>`${page}.calc.${f}`;
-  const files = CONCEPTS[i]*c.f*c.l*c.h;
-  return `<div class="big">${files.toLocaleString('en-US')}</div>${E('p',CK('r1'),CALCL.r1,'lead')}<p class="muted">${esc(CONCEPTS[i])} concepts × ${c.f} formats × ${c.l} languages × ${c.h} hooks</p><p style="font-weight:600">${E('span',CK('r2'),CALCL.r2)} ${esc(planName(i))} · ${esc(planPrice(i))}/mo</p>`;
+  const files = CONCEPTS[i]*c.f*c.l*c.h*(c.c||1);
+  return `<div class="big">${files.toLocaleString('en-US')}</div>${E('p',CK('r1'),CALCL.r1,'lead')}<p class="muted">${esc(CONCEPTS[i])} concepts × ${c.f} formats × ${c.l} languages × ${c.h} hooks × ${c.c||1} CTAs</p>`;
 }
 
 /* ---------- page render ---------- */
@@ -282,7 +318,7 @@ function layoutFor(p){
 function render(){
   const cfg = PAGES[page]; const lay = layoutFor(page);
   const byId = Object.fromEntries(cfg.modules.map(m=>[m.id,m]));
-  const nav = `<header class="nav"><a class="logo" href="/" aria-label="Toggle — main page"><svg viewBox="0 0 1925 243" aria-hidden="true"><g fill="currentColor"><path d="M1738.95 241.42V164.07H1526.15V1.27H1438.95V241.42H1738.95Z"/><path d="M1850.15 89.52V67.17H1924.8V1.27H1771V241.42H1924.8V175.52H1850.15V152.47H1924.8V89.52H1850.15Z"/><path d="M1408.05 127.9V100.45H1290.4V156.6H1339.6C1336.17 164.03 1330.73 169.95 1323.3 174.35C1315.87 178.75 1305.97 181.02 1293.6 181.15C1279.4 180.92 1268 177.85 1259.4 171.95C1250.9 165.92 1244.77 158.43 1241 149.5C1237.23 140.47 1235.42 131.27 1235.55 121.9C1235.55 110.83 1237.85 101.05 1242.45 92.55C1247.08 84.05 1253.55 77.38 1261.85 72.55C1270.12 67.68 1279.83 65.2 1291 65.1C1301.33 65.2 1310.22 67.13 1317.65 70.9C1325.18 74.77 1331.05 79.88 1335.25 86.25L1391.4 54.15C1380.97 37.78 1366.98 24.77 1349.45 15.1C1331.82 5.53 1311.92 .63 1289.75 .4C1266.52 .63 1245.87 6.02 1227.8 16.55C1209.8 27.08 1195.6 41.43 1185.2 59.6C1174.87 77.8 1169.58 98.47 1169.35 121.6C1169.58 144.5 1174.8 165.05 1185 183.25C1195.33 201.32 1209.65 215.62 1227.95 226.15C1246.35 236.68 1267.8 242.07 1292.3 242.3C1315.87 242.07 1336.32 237 1353.65 227.1C1370.85 217.23 1384.18 203.68 1393.65 186.45C1403.12 169.35 1407.92 149.83 1408.05 127.9Z"/><path d="M1021.75 .15C998.52 .38 977.87 5.77 959.8 16.3C941.83 26.83 927.63 41.18 917.2 59.35C906.87 77.55 901.58 98.22 901.35 121.35C901.58 144.25 906.8 164.8 917 183C927.33 201.07 941.65 215.37 959.95 225.9C978.35 236.43 999.82 241.82 1024.35 242.05C1047.88 241.82 1068.32 236.75 1085.65 226.85C1102.85 216.98 1116.18 203.43 1125.65 186.2C1135.12 169.1 1139.92 149.58 1140.05 127.65V100.2H1022.4V156.35H1071.6C1068.17 163.78 1062.73 169.7 1055.3 174.1C1047.9 178.5 1038 180.77 1025.6 180.9C1011.4 180.67 1000 177.6 991.4 171.7C982.9 165.67 976.78 158.18 973.05 149.25C969.28 140.22 967.45 131.02 967.55 121.65C967.55 110.58 969.87 100.8 974.5 92.3C979.1 83.8 985.55 77.13 993.85 72.3C1002.12 67.43 1011.85 64.95 1023.05 64.85C1033.38 64.95 1042.25 66.88 1049.65 70.65C1057.18 74.52 1063.05 79.63 1067.25 86L1123.4 53.9C1112.97 37.53 1098.98 24.52 1081.45 14.85C1063.82 5.28 1043.92 .38 1021.75 .15Z"/><path d="M320.3 .72C164.2 7.18 164.4 235.46 320.3 241.82C320.3 241.82 746.5 242.12 746.9 242.12C804.39 242.34 852.46 211.63 868.3 158.77C892.96 77.26 833.18 -3.41 745.75 .58C745.75 .58 504.05 .73 320.3 .73V.72ZM744.58 75.22C803.34 75.22 805.18 166.77 746.9 167.52C746.9 167.52 391.75 167.18 324.25 167.12C286.86 163.79 276.6 111.06 300.7 86.82C306.77 80.45 314.55 75.57 324.25 75.57C361.46 75.57 744.58 75.22 744.58 75.22Z"/><path d="M134.65 77.22H183.7V1.27H0V77.22H49.05V241.42H134.65V77.22Z"/></g></svg></a><nav class="links">${cfg.nav.map((t,i)=>E('button',`${page}.nav.${i}`,t,'',`type="button" data-go="${cfg.go[i]}"`)).join('')}</nav>${cfg.login?E('button',`${page}.nav.login`,'Client login','login','type="button"'):''}${E('button',`${page}.nav.cta`,cfg.cta,'pill-cta','type="button" data-go="form"')}</header>`;
+  const nav = `<header class="nav"><a class="logo" href="/" aria-label="Toggle Concepts — main page"><svg viewBox="0 0 1925 243" aria-hidden="true"><g fill="currentColor"><path d="M1738.95 241.42V164.07H1526.15V1.27H1438.95V241.42H1738.95Z"/><path d="M1850.15 89.52V67.17H1924.8V1.27H1771V241.42H1924.8V175.52H1850.15V152.47H1924.8V89.52H1850.15Z"/><path d="M1408.05 127.9V100.45H1290.4V156.6H1339.6C1336.17 164.03 1330.73 169.95 1323.3 174.35C1315.87 178.75 1305.97 181.02 1293.6 181.15C1279.4 180.92 1268 177.85 1259.4 171.95C1250.9 165.92 1244.77 158.43 1241 149.5C1237.23 140.47 1235.42 131.27 1235.55 121.9C1235.55 110.83 1237.85 101.05 1242.45 92.55C1247.08 84.05 1253.55 77.38 1261.85 72.55C1270.12 67.68 1279.83 65.2 1291 65.1C1301.33 65.2 1310.22 67.13 1317.65 70.9C1325.18 74.77 1331.05 79.88 1335.25 86.25L1391.4 54.15C1380.97 37.78 1366.98 24.77 1349.45 15.1C1331.82 5.53 1311.92 .63 1289.75 .4C1266.52 .63 1245.87 6.02 1227.8 16.55C1209.8 27.08 1195.6 41.43 1185.2 59.6C1174.87 77.8 1169.58 98.47 1169.35 121.6C1169.58 144.5 1174.8 165.05 1185 183.25C1195.33 201.32 1209.65 215.62 1227.95 226.15C1246.35 236.68 1267.8 242.07 1292.3 242.3C1315.87 242.07 1336.32 237 1353.65 227.1C1370.85 217.23 1384.18 203.68 1393.65 186.45C1403.12 169.35 1407.92 149.83 1408.05 127.9Z"/><path d="M1021.75 .15C998.52 .38 977.87 5.77 959.8 16.3C941.83 26.83 927.63 41.18 917.2 59.35C906.87 77.55 901.58 98.22 901.35 121.35C901.58 144.25 906.8 164.8 917 183C927.33 201.07 941.65 215.37 959.95 225.9C978.35 236.43 999.82 241.82 1024.35 242.05C1047.88 241.82 1068.32 236.75 1085.65 226.85C1102.85 216.98 1116.18 203.43 1125.65 186.2C1135.12 169.1 1139.92 149.58 1140.05 127.65V100.2H1022.4V156.35H1071.6C1068.17 163.78 1062.73 169.7 1055.3 174.1C1047.9 178.5 1038 180.77 1025.6 180.9C1011.4 180.67 1000 177.6 991.4 171.7C982.9 165.67 976.78 158.18 973.05 149.25C969.28 140.22 967.45 131.02 967.55 121.65C967.55 110.58 969.87 100.8 974.5 92.3C979.1 83.8 985.55 77.13 993.85 72.3C1002.12 67.43 1011.85 64.95 1023.05 64.85C1033.38 64.95 1042.25 66.88 1049.65 70.65C1057.18 74.52 1063.05 79.63 1067.25 86L1123.4 53.9C1112.97 37.53 1098.98 24.52 1081.45 14.85C1063.82 5.28 1043.92 .38 1021.75 .15Z"/><path d="M320.3 .72C164.2 7.18 164.4 235.46 320.3 241.82C320.3 241.82 746.5 242.12 746.9 242.12C804.39 242.34 852.46 211.63 868.3 158.77C892.96 77.26 833.18 -3.41 745.75 .58C745.75 .58 504.05 .73 320.3 .73V.72ZM744.58 75.22C803.34 75.22 805.18 166.77 746.9 167.52C746.9 167.52 391.75 167.18 324.25 167.12C286.86 163.79 276.6 111.06 300.7 86.82C306.77 80.45 314.55 75.57 324.25 75.57C361.46 75.57 744.58 75.22 744.58 75.22Z"/><path d="M134.65 77.22H183.7V1.27H0V77.22H49.05V241.42H134.65V77.22Z"/></g></svg></a>${page!=='main'?'<button type="button" class="home" data-go="/" aria-label="Back to the main page" title="Main page"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M15 9H3.5M8 4.5 3.5 9 8 13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>':''}<nav class="links">${cfg.nav.map((t,i)=>E('button',`${page}.nav.${i}`,t,'',`type="button" data-go="${cfg.go[i]}"`)).join('')}</nav>${cfg.login?E('button',`${page}.nav.login`,'Client login','login','type="button"'):''}${E('button',`${page}.nav.cta`,cfg.cta,'pill-cta','type="button" data-go="form"')}<button type="button" class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button></header>`;
   const mods = lay.order.map((id,i)=>{
     const m = byId[id]; const K = f => `${page}.${id}.${f}`;
     const o = {span: lay.span[id] || m.span || 12, tone: lay.tone[id] || m.tone || 'grey', fx: fxOn(lay,id)};
@@ -294,7 +330,7 @@ function render(){
     return `<section class="mod ${out.cls}${isH?' is-hidden':''}" id="mod-${id}" data-type="${m.type}">${tool}${out.html}</section>`;
   }).join('');
   DEF[`${page}.foot`] = FOOT;
-  document.getElementById('page').innerHTML = nav + `<div class="grid">${mods}</div><footer class="foot"><span data-k="${page}.foot">${esc(val(page+'.foot'))}</span><span>© Toggle Studio · concepts.toggle.studio</span></footer>`;
+  document.getElementById('page').innerHTML = nav + `<div class="grid">${mods}</div><footer class="foot"><span data-k="${page}.foot">${esc(val(page+'.foot'))}</span><nav class="foot-links" aria-label="Landings">${(page==='main'?[['/agency','For agencies'],['/brand','For brands']]:[['/','← Back to the main page']]).map(([u,t])=>`<button type="button" data-go="${u}">${t}</button>`).join('')}</nav><span>© Toggle Studio · concepts.toggle.studio</span></footer>`;
   document.getElementById('mctaBtn').textContent = page==='agencies' ? 'Get an agency quote' : 'Start a test month · 20% off';
   document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-current', t.dataset.page===page?'page':'false'));
   applyEditable();
@@ -373,6 +409,7 @@ function watchVideos(){ if(!vidObs) return; vidObs.disconnect(); document.queryS
 let formObs = null;
 function watchForm(){
   if(!('IntersectionObserver' in window)) return;
+  const hc=document.querySelector('#mod-hero .cta-card'); if(hc){ if(window.heroObs) heroObs.disconnect(); window.heroObs=new IntersectionObserver(es=>{ document.body.classList.toggle('hero-cta-in-view', es.some(x=>x.isIntersecting)); }); heroObs.observe(hc); }
   if(formObs) formObs.disconnect();
   const f = document.getElementById('mod-form'); if(!f) return;
   formObs = new IntersectionObserver(es=>{ document.body.classList.toggle('form-in-view', es.some(x=>x.isIntersecting)); }, {threshold:0.15});
@@ -395,6 +432,7 @@ function syncPlan(){
   document.querySelectorAll('[data-plan]').forEach(t=>{ const on = Number(t.dataset.plan)===sel; t.classList.toggle('t-sky',on); t.classList.toggle('t-grey',!on); t.setAttribute('aria-pressed', String(on)); });
   document.querySelectorAll('[data-planchip]').forEach(b=>b.setAttribute('aria-pressed', String(Number(b.dataset.planchip)===sel)));
   const r = document.getElementById('calcRes'); if(r){ r.innerHTML = calcOut(); applyEditable(); }
+  const pr = document.getElementById('calcPer'); if(pr) pr.innerHTML = calcPer();
 }
 
 /* ---------- boot ---------- */
@@ -414,6 +452,9 @@ function goTo(target){
 document.getElementById('mcta').addEventListener('click', ()=>goTo('form'));
 const page$ = document.getElementById('page');
 page$.addEventListener('click', e=>{
+  const bg = e.target.closest('.burger');
+  if(bg){ const n=bg.closest('.nav'); const on=!n.classList.contains('open'); n.classList.toggle('open',on); bg.setAttribute('aria-expanded',String(on)); return; }
+  if(e.target.closest('.nav .links [data-go], .nav .pill-cta')){ const n=document.querySelector('.nav.open'); if(n){ n.classList.remove('open'); n.querySelector('.burger').setAttribute('aria-expanded','false'); } }
   const mu = e.target.closest('[data-mup]');
   if(mu){ e.preventDefault(); mfile.accept = MEDIA_ACC[mu.dataset.mup]; mfile.dataset.slot = mu.dataset.mup; mfile.click(); return; }
   const mr = e.target.closest('[data-mreset]');
@@ -483,14 +524,14 @@ page$.addEventListener('submit', async e=>{ e.preventDefault(); if(editing) retu
   const em=document.getElementById('f2-'+page), err=document.getElementById('formErr'), d=document.getElementById('formDone'), btn=f.querySelector('.submit');
   const ok = em && /^\S+@\S+\.\S+$/.test(em.value.trim());
   if(d) d.hidden = true;
-  if(!ok){ err.textContent='Please add a valid work e-mail.'; err.hidden=false; if(em){ em.setAttribute('aria-invalid','true'); em.focus(); } return; }
+  if(!ok){ err.textContent='Please add a valid work email.'; err.hidden=false; if(em){ em.setAttribute('aria-invalid','true'); em.focus(); } return; }
   em.removeAttribute('aria-invalid'); err.hidden = true;
   const hp = f.querySelector('[name="_gotcha"]');
   const m = PAGES[page].modules.find(x=>x.type==='form'); const K = k=>`${page}.form.${k}`;
   const chip = FORM[page] ? FORM[page].chip : null;
   const data = { _subject:`New request — Toggle Concepts (${LANDING_NAME[page]})`, landing:LANDING_NAME[page], name:g('f1'), email:em.value.trim(), company:g('f3') };
   if(m.plan){ const i=planSel(); data.plan = `${planName(i)} · ${CONCEPTS[i]} concepts · ${planPrice(i)}/mo`; }
-  data[val(K('f4'))] = chip!=null ? m.chips[chip] : '';
+  if(m.chips) data[val(K('f4'))] = chip!=null ? m.chips[chip] : '';
   data[val(K('f5'))] = g('f5');
   if(hp && hp.value){ d.hidden=false; f.reset(); return; }
   f.dataset.sending='1'; btn.disabled=true; btn.style.opacity='.6';
